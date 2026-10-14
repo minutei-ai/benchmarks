@@ -1,0 +1,17 @@
+{
+  "name": "legal-memory-bench",
+  "version": "0.1.0",
+  "description": "Memória jurídica entre sessões: correção, isolamento, esquecimento, autorização e tempo.",
+  "language": "pt-BR",
+  "synthetic": true,
+  "status": "initial_public_suite",
+  "legalReview": "pending",
+  "cases": [
+    "M01",
+    "M02",
+    "M03",
+    "M04",
+    "M05",
+    "M06"
+  ]
+}

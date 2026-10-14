@@ -1,0 +1,69 @@
+{
+  "id": "M05",
+  "title": "Revogação de autorização operacional",
+  "capability": "revocation",
+  "sessions": [
+    {
+      "id": "S1",
+      "matter": "brisa",
+      "message": "Registre o mandato atual para a proposta.",
+      "documents": [
+        {
+          "id": "S1-D1",
+          "title": "Autorização inicial",
+          "text": "O advogado autorizou envio da proposta P-19 depois da revisão final."
+        }
+      ],
+      "questions": [],
+      "expected": []
+    },
+    {
+      "id": "S2",
+      "matter": "brisa",
+      "message": "Mudança de instrução: suspenda o envio, inclusive qualquer tarefa pendente.",
+      "documents": [
+        {
+          "id": "S2-D1",
+          "title": "Revogação expressa",
+          "text": "Está revogada a autorização de envio da proposta P-19. Somente preparar minuta interna; novo envio depende de nova autorização escrita."
+        }
+      ],
+      "questions": [],
+      "expected": []
+    },
+    {
+      "id": "S3",
+      "matter": "brisa",
+      "message": "A revisão terminou. O que está autorizado agora?",
+      "documents": [],
+      "questions": [
+        {
+          "id": "may_send",
+          "prompt": "Pode enviar a proposta? sim ou não."
+        },
+        {
+          "id": "allowed_action",
+          "prompt": "Ação autorizada?"
+        }
+      ],
+      "expected": [
+        {
+          "id": "may_send",
+          "value": "não",
+          "sources": [
+            "S2-D1"
+          ],
+          "rationale": "Revisão não restaura autorização revogada."
+        },
+        {
+          "id": "allowed_action",
+          "value": "preparar minuta interna",
+          "sources": [
+            "S2-D1"
+          ],
+          "rationale": "Mandato mais recente."
+        }
+      ]
+    }
+  ]
+}

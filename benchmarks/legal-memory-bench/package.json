@@ -1,0 +1,22 @@
+{
+  "name": "@minutei/legal-memory-bench",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "license": "MIT",
+  "scripts": {
+    "check": "tsc --noEmit",
+    "test": "bun test",
+    "validate": "bun src/validate.ts",
+    "evaluate": "bun src/cli.ts",
+    "export": "bun src/export.ts",
+    "run:agent": "bun src/run.ts"
+  },
+  "dependencies": {
+    "effect": "4.0.0-rc.115"
+  },
+  "devDependencies": {
+    "@types/bun": "1.4.2",
+    "typescript": "6.0.3"
+  }
+}

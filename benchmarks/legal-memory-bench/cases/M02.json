@@ -1,0 +1,69 @@
+{
+  "id": "M02",
+  "title": "Mesmo nome em processos diferentes",
+  "capability": "isolation",
+  "sessions": [
+    {
+      "id": "S1",
+      "matter": "silva-locacao",
+      "message": "Guarde no caso de locação de Silva: proposta máxima de acordo e objeto.",
+      "documents": [
+        {
+          "id": "S1-D1",
+          "title": "Mandato locação",
+          "text": "No caso silva-locacao, o teto autorizado para preparar proposta é R$ 12.000,00; o objeto é aluguel da sala 12."
+        }
+      ],
+      "questions": [],
+      "expected": []
+    },
+    {
+      "id": "S2",
+      "matter": "silva-consumo",
+      "message": "Agora estamos em OUTRO caso de Silva, relação de consumo. Mantenha os fatos separados.",
+      "documents": [
+        {
+          "id": "S2-D1",
+          "title": "Mandato consumo",
+          "text": "No caso silva-consumo, o teto autorizado para preparar proposta é R$ 2.500,00; o objeto é conserto de geladeira."
+        }
+      ],
+      "questions": [],
+      "expected": []
+    },
+    {
+      "id": "S3",
+      "matter": "silva-locacao",
+      "message": "Retome exclusivamente a locação de Silva.",
+      "documents": [],
+      "questions": [
+        {
+          "id": "ceiling_cents",
+          "prompt": "Teto da locação em centavos?"
+        },
+        {
+          "id": "object",
+          "prompt": "Objeto do caso atual?"
+        }
+      ],
+      "expected": [
+        {
+          "id": "ceiling_cents",
+          "value": "1200000",
+          "sources": [
+            "S1-D1"
+          ],
+          "rationale": "Valor do processo correto."
+        },
+        {
+          "id": "object",
+          "value": "aluguel da sala 12",
+          "sources": [
+            "S1-D1"
+          ],
+          "rationale": "Não importar fato do caso de consumo."
+        }
+      ]
+    }
+  ]
+}

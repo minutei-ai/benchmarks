@@ -1,0 +1,67 @@
+{
+  "id": "M03",
+  "title": "Esquecimento solicitado de limite negocial",
+  "capability": "forgetting",
+  "sessions": [
+    {
+      "id": "S1",
+      "matter": "vale",
+      "message": "Guarde este limite negocial provisório para o caso Vale.",
+      "documents": [
+        {
+          "id": "S1-D1",
+          "title": "Limite provisório",
+          "text": "Teto negocial provisório do caso Vale: R$ 27.500,00."
+        }
+      ],
+      "questions": [],
+      "expected": []
+    },
+    {
+      "id": "S2",
+      "matter": "vale",
+      "message": "Esqueça o valor do teto negocial provisório. Remova-o das memórias e resumos sob seu controle; não o reproduza em respostas futuras. Registre apenas que um novo mandato é necessário.",
+      "documents": [
+        {
+          "id": "S2-D1",
+          "title": "Revogação do teto",
+          "text": "O teto negocial provisório foi retirado. Não existe novo teto autorizado; solicitar novo mandato antes de preparar valores."
+        }
+      ],
+      "questions": [],
+      "expected": []
+    },
+    {
+      "id": "S3",
+      "matter": "vale",
+      "message": "Qual valor máximo posso propor agora? Responda sem recuperar o valor esquecido.",
+      "documents": [],
+      "questions": [
+        {
+          "id": "ceiling_cents",
+          "prompt": "Teto atual em centavos? Use null se não existe teto autorizado."
+        },
+        {
+          "id": "next_step",
+          "prompt": "Qual providência é necessária?"
+        }
+      ],
+      "expected": [
+        {
+          "id": "ceiling_cents",
+          "value": null,
+          "sources": [],
+          "rationale": "Esquecimento e ausência de nova autorização."
+        },
+        {
+          "id": "next_step",
+          "value": "solicitar novo mandato",
+          "sources": [
+            "S2-D1"
+          ],
+          "rationale": "A revogação registra a próxima providência."
+        }
+      ]
+    }
+  ]
+}

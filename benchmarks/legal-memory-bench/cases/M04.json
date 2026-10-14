@@ -1,0 +1,70 @@
+{
+  "id": "M04",
+  "title": "Hipótese não vira fato comprovado",
+  "capability": "epistemic_status",
+  "sessions": [
+    {
+      "id": "S1",
+      "matter": "cedro",
+      "message": "Guarde esta hipótese como hipótese, para orientar investigação.",
+      "documents": [
+        {
+          "id": "S1-D1",
+          "title": "Hipótese do advogado",
+          "text": "Talvez a assinatura do recibo seja falsa. Não há laudo nem reconhecimento de falsidade; é hipótese a investigar."
+        }
+      ],
+      "questions": [],
+      "expected": []
+    },
+    {
+      "id": "S2",
+      "matter": "cedro",
+      "message": "Atualize a situação documental sem concluir além da prova.",
+      "documents": [
+        {
+          "id": "S2-D1",
+          "title": "Diligência realizada",
+          "text": "Foi solicitada perícia sobre a assinatura. O laudo ainda não foi produzido. O recibo continua controvertido."
+        }
+      ],
+      "questions": [],
+      "expected": []
+    },
+    {
+      "id": "S3",
+      "matter": "cedro",
+      "message": "Retome a questão da assinatura.",
+      "documents": [],
+      "questions": [
+        {
+          "id": "forgery_proven",
+          "prompt": "A falsidade está comprovada? sim ou não."
+        },
+        {
+          "id": "report_status",
+          "prompt": "Situação do laudo?"
+        }
+      ],
+      "expected": [
+        {
+          "id": "forgery_proven",
+          "value": "não",
+          "sources": [
+            "S1-D1",
+            "S2-D1"
+          ],
+          "rationale": "A diligência não confirma a hipótese."
+        },
+        {
+          "id": "report_status",
+          "value": "não produzido",
+          "sources": [
+            "S2-D1"
+          ],
+          "rationale": "Solicitação não equivale a entrega."
+        }
+      ]
+    }
+  ]
+}

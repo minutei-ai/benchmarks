@@ -1,0 +1,69 @@
+{
+  "id": "M01",
+  "title": "Correção de valor comprovado",
+  "capability": "update",
+  "sessions": [
+    {
+      "id": "S1",
+      "matter": "aurora",
+      "message": "Registre para continuidade: estamos no caso Aurora. A entrada informada pelo cliente é de R$ 45.000,00, ainda sem comprovante.",
+      "documents": [
+        {
+          "id": "S1-D1",
+          "title": "Relato inicial",
+          "text": "O cliente relata entrada de R$ 45.000,00. Ainda não foi conferida documentação."
+        }
+      ],
+      "questions": [],
+      "expected": []
+    },
+    {
+      "id": "S2",
+      "matter": "aurora",
+      "message": "Corrija a informação anterior pela prova recebida. Preserve a distinção entre relato e documento.",
+      "documents": [
+        {
+          "id": "S2-D1",
+          "title": "Comprovante validado",
+          "text": "A entrada efetivamente paga pela Aurora foi de R$ 48.000,00. O cliente confirma que o relato anterior de R$ 45.000,00 estava errado."
+        }
+      ],
+      "questions": [],
+      "expected": []
+    },
+    {
+      "id": "S3",
+      "matter": "aurora",
+      "message": "Retome o caso usando a memória e responda às perguntas; o histórico anterior não será reenviado.",
+      "documents": [],
+      "questions": [
+        {
+          "id": "paid_cents",
+          "prompt": "Entrada comprovada, em centavos?"
+        },
+        {
+          "id": "basis",
+          "prompt": "A natureza do valor atual é relato, hipótese ou prova?"
+        }
+      ],
+      "expected": [
+        {
+          "id": "paid_cents",
+          "value": "4800000",
+          "sources": [
+            "S2-D1"
+          ],
+          "rationale": "A correção documental substitui o relato."
+        },
+        {
+          "id": "basis",
+          "value": "prova",
+          "sources": [
+            "S2-D1"
+          ],
+          "rationale": "Comprovante validado."
+        }
+      ]
+    }
+  ]
+}

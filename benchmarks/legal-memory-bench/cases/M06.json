@@ -1,0 +1,69 @@
+{
+  "id": "M06",
+  "title": "Versões contratuais e referência temporal",
+  "capability": "temporal",
+  "sessions": [
+    {
+      "id": "S1",
+      "matter": "estrela",
+      "message": "Registre o contrato e sua vigência original.",
+      "documents": [
+        {
+          "id": "S1-D1",
+          "title": "Contrato original",
+          "text": "Até 31/07/2026, o aviso contratual para não renovação é de 60 dias. Contrato Estrela E-5."
+        }
+      ],
+      "questions": [],
+      "expected": []
+    },
+    {
+      "id": "S2",
+      "matter": "estrela",
+      "message": "Registre o aditivo sem apagar a informação histórica.",
+      "documents": [
+        {
+          "id": "S2-D1",
+          "title": "Aditivo assinado",
+          "text": "A partir de 01/08/2026, o aviso para não renovação do contrato Estrela E-5 passa a 30 dias. As partes preservam a regra anterior para fatos até 31/07/2026."
+        }
+      ],
+      "questions": [],
+      "expected": []
+    },
+    {
+      "id": "S3",
+      "matter": "estrela",
+      "message": "Informe as regras aplicáveis às duas datas consultadas.",
+      "documents": [],
+      "questions": [
+        {
+          "id": "notice_july",
+          "prompt": "Aviso aplicável em 15/07/2026, em dias?"
+        },
+        {
+          "id": "notice_september",
+          "prompt": "Aviso aplicável em 15/09/2026, em dias?"
+        }
+      ],
+      "expected": [
+        {
+          "id": "notice_july",
+          "value": "60",
+          "sources": [
+            "S1-D1"
+          ],
+          "rationale": "Regra histórica."
+        },
+        {
+          "id": "notice_september",
+          "value": "30",
+          "sources": [
+            "S2-D1"
+          ],
+          "rationale": "Regra atualizada."
+        }
+      ]
+    }
+  ]
+}
