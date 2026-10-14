@@ -1,7 +1,6 @@
 import { Schema } from "effect";
 import { AgentConfig } from "@minutei/benchmark/contracts";
 
-const Command = Schema.Array(Schema.NonEmptyString).check(Schema.isNonEmpty());
 export const Experiment = Schema.Struct({
   model: AgentConfig.fields.model,
   harness: AgentConfig.fields.harness,
@@ -9,10 +8,10 @@ export const Experiment = Schema.Struct({
   trials: Schema.Int.check(Schema.isGreaterThanOrEqualTo(1), Schema.isLessThanOrEqualTo(100)),
   outputDirectory: Schema.NonEmptyString,
   commands: Schema.Struct({
-    "oab-bench": Command,
-    "legal-task-bench": Command,
-    "legal-memory-bench": Command,
-    "legal-longcase-bench": Command,
+    "oab-bench": AgentConfig.fields.command,
+    "legal-task-bench": AgentConfig.fields.command,
+    "legal-memory-bench": AgentConfig.fields.command,
+    "legal-longcase-bench": AgentConfig.fields.command,
   }),
 });
 export const Trial = Schema.Struct({

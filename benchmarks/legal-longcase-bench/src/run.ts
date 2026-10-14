@@ -18,7 +18,6 @@ const run = Effect.fn("benchmark.run")(function* () {
   if (!configPath) return yield* Effect.fail("Usage: bun run run:agent config.json");
   const raw = yield* Effect.tryPromise(() => Bun.file(configPath).text());
   const config = yield* Schema.decodeUnknownEffect(Schema.fromJsonString(AgentConfig))(raw);
-  if (!config.command.length) return yield* Effect.fail("An agent adapter command is required");
   const data = yield* Effect.tryPromise(() => loadCase(config.caseId));
   const outputPath = resolve(config.output);
   const started = yield* Clock.currentTimeMillis;

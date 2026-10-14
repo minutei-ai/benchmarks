@@ -29,13 +29,13 @@ export const Manifest = Schema.Struct({
   synthetic: Schema.Boolean,
   status: Schema.NonEmptyString,
   legalReview: Schema.NonEmptyString,
-  cases: Schema.Array(Schema.NonEmptyString),
+  cases: Schema.Array(Schema.NonEmptyString).check(Schema.isNonEmpty()),
 });
 export const AgentConfig = Schema.Struct({
   caseId: Schema.NonEmptyString,
   model: Schema.NonEmptyString.check(Schema.isPattern(/\S/u)),
   harness: Schema.NonEmptyString.check(Schema.isPattern(/\S/u)),
-  command: Schema.Array(Schema.NonEmptyString),
+  command: Schema.Array(Schema.NonEmptyString).check(Schema.isNonEmpty()),
   output: Schema.NonEmptyString,
   timeoutMs: Schema.optional(
     Schema.Int.pipe(

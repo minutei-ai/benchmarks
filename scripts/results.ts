@@ -20,16 +20,32 @@ export const summarize = Effect.fn("benchmark.summarize")(function* (
 ) {
   if (!trials.length) return yield* Effect.fail(new InvalidExperiment({ reason: "No trials" }));
   const identities = new Set(
-    trials.map((trial) => `${trial.benchmark}:${trial.caseId}:${trial.trial}`),
+    trials.map((trial) =>
+      Schema.encodeSync(
+        Schema.fromJsonString(
+          Schema.Tuple([Trial.fields.benchmark, Trial.fields.caseId, Trial.fields.trial]),
+        ),
+      )([trial.benchmark, trial.caseId, trial.trial]),
+    ),
   );
   if (identities.size !== trials.length)
     return yield* Effect.fail(new InvalidExperiment({ reason: "Duplicate trial identity" }));
-  const configurations = new Set(trials.map((trial) => `${trial.model}:${trial.harness}`));
+  const configurations = new Set(
+    trials.map((trial) =>
+      Schema.encodeSync(
+        Schema.fromJsonString(Schema.Tuple([Trial.fields.model, Trial.fields.harness])),
+      )([trial.model, trial.harness]),
+    ),
+  );
   if (configurations.size !== 1)
     return yield* Effect.fail(
       new InvalidExperiment({ reason: "One summary requires one model and harness configuration" }),
     );
-  const groups = Map.groupBy(trials, (trial) => `${trial.benchmark}:${trial.caseId}`);
+  const groups = Map.groupBy(trials, (trial) =>
+    Schema.encodeSync(
+      Schema.fromJsonString(Schema.Tuple([Trial.fields.benchmark, Trial.fields.caseId])),
+    )([trial.benchmark, trial.caseId]),
+  );
   const cases = yield* Effect.forEach([...groups.values()], (records) =>
     Effect.gen(function* () {
       const revisions = new Set(

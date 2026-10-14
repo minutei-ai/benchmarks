@@ -46,6 +46,7 @@ export function evaluate(data: typeof WorkCase.Type, submission: typeof Submissi
   const answerIds = submission.answers.map((answer) => answer.id);
   const artifactIds = submission.artifacts.map((artifact) => artifact.id);
   const contractValid =
+    Object.values(validateCase(data)).every(Boolean) &&
     submission.caseId === data.id &&
     new Set(answerIds).size === answerIds.length &&
     answerIds.length === data.expected.length &&

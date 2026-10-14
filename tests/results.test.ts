@@ -72,3 +72,13 @@ test("the experiment requires commands for all four suites", () => {
   expect(Schema.is(Experiment)(partial)).toBe(false);
   expect(Schema.is(Trial)(trial)).toBe(true);
 });
+
+test("configuration keys cannot collide when identities contain separators", async () => {
+  const records = [
+    { ...trial, model: "a:b", harness: "c" },
+    { ...trial, trial: 2, model: "a", harness: "b:c" },
+  ];
+  expect(await Effect.runPromise(Effect.result(summarize(records)))).toMatchObject({
+    _tag: "Failure",
+  });
+});

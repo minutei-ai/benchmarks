@@ -107,3 +107,9 @@ test("an otherwise valid answer cannot add citations outside its required source
   ];
   expect(evaluate(withDecoy, { ...submission, answers }).automaticPassed).toBe(false);
 });
+
+test("an empty rubric cannot turn unreviewed work into a passing task", () => {
+  const invalid = { ...data, rubric: [] };
+  const emptyReview = { ...review, caseDigest: caseDigest(invalid), criteria: [] };
+  expect(evaluate(invalid, { ...submission, review: emptyReview }).passed).toBe(false);
+});
