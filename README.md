@@ -1,3 +1,5 @@
+> Este repositório foi consolidado em [minutei-ai/benchmarks](https://github.com/minutei-ai/benchmarks/tree/main/benchmarks/legal-longcase-bench). A manutenção continua lá. Casos, avaliadores, licença e histórico Git foram preservados.
+
 # legal-longcase-bench
 
 Dossiês jurídicos extensos com evidências dispersas, contradições e documentos de outros contratos.
