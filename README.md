@@ -1,3 +1,5 @@
+> Este repositório foi consolidado em [minutei-ai/benchmarks](https://github.com/minutei-ai/benchmarks/tree/main/benchmarks/oab-bench). A manutenção continua lá. Casos, avaliadores, licença e histórico Git foram preservados.
+
 # OAB Bench — Legal Agent Harness Benchmark
 
 Benchmark público do Minutei para avaliar **harnesses de agentes em tarefas jurídicas brasileiras**. A unidade avaliada é a execução completa: acesso às evidências, ferramentas, estado produzido e encerramento. Comparações de harness mantêm o modelo e suas configurações fixos.
