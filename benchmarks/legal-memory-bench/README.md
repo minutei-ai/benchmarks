@@ -20,7 +20,9 @@ Seis casos, três sessões por caso. O runner inicia um novo processo do adapter
 Requer Bun 1.4.2. Todos os checks locais são offline e não chamam provedores.
 
 ```sh
+cd ../..
 bun install --frozen-lockfile
+cd benchmarks/legal-memory-bench
 bun run check
 bun run validate
 bun test
@@ -80,7 +82,7 @@ O modelo declarado fica fixo entre configurações. Compare estratégias de mem�
 No checkout do Minutei com o adapter local, mantenha `bun run bench:serve` em outro terminal e execute:
 
 ```sh
-bun run bench:run /caminho/legal-memory-bench M01 /tmp/M01.json
+bun run bench:run /caminho/benchmarks/benchmarks/legal-memory-bench M01 /tmp/M01.json
 ```
 
 O adapter usa login de desenvolvimento, um escritório isolado, documentos e notas reais, ferramentas e streaming do Capi. A inferência continua usando o provedor configurado do Minutei. Em memória, cada sessão usa uma conversa nova, sem reenvio do histórico. Consulte `docs/legal-benchmarks-local.md` no Minutei para configuração e limites.

@@ -19,7 +19,9 @@ Todos exigem conclusão explícita, exatamente uma minuta, evidências e respeit
 Requer Bun 1.4.2.
 
 ```sh
+cd ../..
 bun install --frozen-lockfile
+cd benchmarks/oab-bench
 bun run check
 bun test
 bun run bench run.json > results.json

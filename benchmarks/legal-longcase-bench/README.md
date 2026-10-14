@@ -19,7 +19,9 @@ Essas são contagens medidas dos arquivos, não estimativas de tokens. Os distra
 Requer Bun 1.4.2. Todos os checks locais são offline e não chamam provedores.
 
 ```sh
+cd ../..
 bun install --frozen-lockfile
+cd benchmarks/legal-longcase-bench
 bun run check
 bun run validate
 bun test
@@ -103,7 +105,7 @@ Para comparar efeitos do tamanho isoladamente, será necessário gerar versões 
 No checkout do Minutei com o adapter local, mantenha `bun run bench:serve` em outro terminal e execute:
 
 ```sh
-bun run bench:run /caminho/legal-longcase-bench C01 /tmp/C01.json
+bun run bench:run /caminho/benchmarks/benchmarks/legal-longcase-bench C01 /tmp/C01.json
 ```
 
 O adapter usa login de desenvolvimento, um escritório isolado, documentos e notas reais, ferramentas e streaming do Capi. A inferência continua usando o provedor configurado do Minutei. Em memória, cada sessão usa uma conversa nova, sem reenvio do histórico. Consulte `docs/legal-benchmarks-local.md` no Minutei para configuração e limites.

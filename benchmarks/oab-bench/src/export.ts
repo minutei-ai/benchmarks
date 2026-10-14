@@ -25,8 +25,8 @@ for (const id of items) {
       evaluation: "environment_state",
       legal_review: "pending",
       legal_quality_scored: false,
-      repository: "https://github.com/minutei-ai/oab-bench",
-      runner: "bun run bench run.json",
+      repository: "https://github.com/minutei-ai/benchmarks",
+      runner: "bun run --cwd benchmarks/oab-bench bench /absolute/path/to/run.json",
       integration: "JSONL adapter required; not runnable as a single model generation",
     },
   }));

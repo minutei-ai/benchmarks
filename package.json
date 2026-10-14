@@ -1,0 +1,15 @@
+{
+  "name": "@minutei/benchmarks",
+  "private": true,
+  "type": "module",
+  "packageManager": "bun@1.4.2",
+  "workspaces": [
+    "benchmarks/*"
+  ],
+  "scripts": {
+    "check": "bun run --workspaces check",
+    "test": "bun run --workspaces test",
+    "validate": "bun run --filter \"@minutei/legal-*-bench\" validate",
+    "export": "bun run --silent --cwd benchmarks/oab-bench export && bun run --silent --cwd benchmarks/legal-task-bench export && bun run --silent --cwd benchmarks/legal-memory-bench export && bun run --silent --cwd benchmarks/legal-longcase-bench export"
+  }
+}
