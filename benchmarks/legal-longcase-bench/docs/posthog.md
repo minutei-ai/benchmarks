@@ -1,5 +1,7 @@
 # Dataset PostHog
 
+Este arquivo registra a publicação histórica de 0.1.x. A fonte atual está em [minutei-ai/benchmarks](https://github.com/minutei-ai/benchmarks/tree/main/benchmarks/legal-longcase-bench). O export 0.2.0 não foi publicado no PostHog. Os repositórios separados foram removidos; commits históricos continuam acessíveis neste repositório com os caminhos originais.
+
 [legal-longcase-bench](https://us.posthog.com/project/413137/ai-evals/datasets/01a0e590-f599-78c3-b0ea-f1ab507459e6) — projeto Minutei 413137. Publicado e conferido por leitura da API em 27/09/2026.
 
 - Dataset: `01a0e590-f599-78c3-b0ea-f1ab507459e6`.
@@ -8,11 +10,11 @@
 - Itens: 3.
 - Commit dos casos e avaliadores: `eed3220404690277af7e819fca9330bc202195d9`.
 
-| Item estável | ID PostHog | Versão |
-| --- | --- | --- |
-| legal-longcase-bench-0.1.0-C03 | 01a0e590-f867-7a4a-972b-ce0fc3d0315d | 1 |
-| legal-longcase-bench-0.1.0-C02 | 01a0e590-f79f-725e-a6e6-6ef96c2f476f | 1 |
-| legal-longcase-bench-0.1.0-C01 | 01a0e590-f693-77a1-adcd-92be8a83b069 | 1 |
+| Item estável                   | ID PostHog                           | Versão |
+| ------------------------------ | ------------------------------------ | ------ |
+| legal-longcase-bench-0.1.0-C03 | 01a0e590-f867-7a4a-972b-ce0fc3d0315d | 1      |
+| legal-longcase-bench-0.1.0-C02 | 01a0e590-f79f-725e-a6e6-6ef96c2f476f | 1      |
+| legal-longcase-bench-0.1.0-C01 | 01a0e590-f693-77a1-adcd-92be8a83b069 | 1      |
 
 Inputs, critérios esperados e metadados dos 3 itens foram comparados estruturalmente ao export local. Os metadados incluem commit, caminho do caso e hash do conteúdo carregado. Acervos grandes permanecem no Git com URL fixada ao commit.
 

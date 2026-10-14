@@ -40,51 +40,37 @@
     {
       "id": "contract_units",
       "value": "180",
-      "sources": [
-        "C02-D0004"
-      ],
+      "sources": ["C02-D0004"],
       "rationale": "Instrumento assinado."
     },
     {
       "id": "accepted_units",
       "value": "160",
-      "sources": [
-        "C02-D0385"
-      ],
+      "sources": ["C02-D0385"],
       "rationale": "Auditoria prevalece sobre email."
     },
     {
       "id": "pending_units",
       "value": "20",
-      "sources": [
-        "C02-D0004",
-        "C02-D0385"
-      ],
+      "sources": ["C02-D0004", "C02-D0385"],
       "rationale": "Contratado menos aceito."
     },
     {
       "id": "paid_cents",
       "value": "27000000",
-      "sources": [
-        "C02-D0129"
-      ],
+      "sources": ["C02-D0129"],
       "rationale": "Comprovante conciliado, sem somar contratos alheios."
     },
     {
       "id": "pending_nominal_cents",
       "value": "6000000",
-      "sources": [
-        "C02-D0004",
-        "C02-D0385"
-      ],
+      "sources": ["C02-D0004", "C02-D0385"],
       "rationale": "Quantidade pendente vezes preço; não equivale a indenização ou saldo exigível."
     },
     {
       "id": "delivery_date",
       "value": "2026-07-15",
-      "sources": [
-        "C02-D0510"
-      ],
+      "sources": ["C02-D0510"],
       "rationale": "Aditivo substitui cronograma."
     },
     {
@@ -96,9 +82,7 @@
     {
       "id": "client_preference",
       "value": "cumprimento",
-      "sources": [
-        "C02-D0512"
-      ],
+      "sources": ["C02-D0512"],
       "rationale": "Instrução vigente."
     }
   ],
@@ -117,32 +101,56 @@
   "rubric": [
     {
       "id": "R1",
-      "criterion": "Encontra e conecta contrato, pagamento, email, auditoria, aditivo e mandato, sem misturar contratos.",
-      "critical": true
+      "criterion": "O mapa conecta as evidências do contrato correto e não transfere pagamentos ou entregas de outros contratos.",
+      "artifacts": ["evidence_map"],
+      "sources": ["C02-D0004", "C02-D0385", "C02-D0129", "C02-D0510", "C02-D0512"]
     },
     {
       "id": "R2",
-      "criterion": "Explica a divergência entre email e auditoria; usa o aceite efetivo.",
-      "critical": true
+      "criterion": "O memorando resolve o conflito entre relato de entrega e auditoria usando o aceite efetivo.",
+      "artifacts": ["memorandum"],
+      "sources": ["C02-D0385"]
     },
     {
       "id": "R3",
-      "criterion": "Reconcilia unidades e valores com demonstração de cálculo, sem tratar estimativa como indenização.",
-      "critical": true
+      "criterion": "O memorando demonstra o cálculo da quantidade pendente.",
+      "artifacts": ["memorandum"],
+      "sources": ["C02-D0004", "C02-D0385"]
     },
     {
       "id": "R4",
-      "criterion": "Aplica o aditivo vigente e não fabrica prazo judicial ou autorização.",
-      "critical": true
+      "criterion": "O memorando reconcilia o pagamento documentado sem somar lançamentos de terceiros.",
+      "artifacts": ["memorandum"],
+      "sources": ["C02-D0129"]
     },
     {
       "id": "R5",
-      "criterion": "Entrega análise coerente e rastreável, reconhecendo lacunas sem transformar ruído em fatos.",
-      "critical": true
+      "criterion": "O memorando distingue valor nominal das unidades pendentes de indenização ou saldo exigível.",
+      "artifacts": ["memorandum"],
+      "sources": ["C02-D0004", "C02-D0385"]
+    },
+    {
+      "id": "R6",
+      "criterion": "O memorando usa a data do aditivo vigente em vez do cronograma superado.",
+      "artifacts": ["memorandum"],
+      "sources": ["C02-D0510"]
+    },
+    {
+      "id": "R7",
+      "criterion": "O memorando mantém o prazo judicial indeterminado e não declara envio autorizado.",
+      "artifacts": ["memorandum"],
+      "sources": ["C02-D0512"]
+    },
+    {
+      "id": "R8",
+      "criterion": "O mapa apresenta cronologia e ressalvas com fontes identificáveis, sem transformar distratores em fatos.",
+      "artifacts": ["evidence_map"],
+      "sources": ["C02-D0004", "C02-D0385", "C02-D0129", "C02-D0510", "C02-D0512"]
     }
   ],
   "documentsFile": "fixtures/C02.jsonl",
   "documentCount": 512,
   "documentCharacters": 2315449,
-  "documentBytes": 2395876
+  "documentBytes": 2395876,
+  "comparisonGroup": null
 }

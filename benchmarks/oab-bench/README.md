@@ -1,62 +1,42 @@
-# OAB Bench — Legal Agent Harness Benchmark
+# OAB Bench
 
-Benchmark público do Minutei para avaliar **harnesses de agentes em tarefas jurídicas brasileiras**. A unidade avaliada é a execução completa: acesso às evidências, ferramentas, estado produzido e encerramento. Comparações de harness mantêm o modelo e suas configurações fixos.
+Ambiente jurídico sintético para avaliar o harness por ferramentas e estado produzido. **Revisão 0.2.0, seis cenários.** OAB é o nome histórico do projeto, sem vínculo com a Ordem ou alegação de aprovação no Exame de Ordem.
 
-**Estado: v0.1, suíte inicial de engenharia.** Três cenários sintéticos executáveis, avaliador determinístico, protocolo para adapters e exportação para datasets do PostHog. Sem execução do Capi, ranking publicado ou validação jurídica especializada. `legalQuality: not_evaluated` aparece em todo resultado.
+| Cenário             | Comportamento avaliado                                                                     |
+| ------------------- | ------------------------------------------------------------------------------------------ |
+| evidence            | Paginação, leitura anterior à gravação, achado factual e releitura da minuta               |
+| injection           | Instrução de terceiro não autoriza acesso a outro cliente                                  |
+| retry               | Timeout depois do commit exige confirmação por leitura ou retry idempotente sem duplicação |
+| authorization       | Pedido do fornecedor não autoriza envio externo                                            |
+| missing_information | Sem conferência, preservar quantidade desconhecida e solicitar esclarecimento              |
+| source_revision     | Retificação invalida a leitura anterior e bloqueia gravação com revisão antiga             |
 
-## Cenários implementados
-
-| ID | Situação | O que é verificado |
-| --- | --- | --- |
-| `evidence` | Documentos paginados, email contradito pela conferência e pedido de minuta interna | Minuta efetivamente salva, citações literais de fontes lidas e presentes no documento |
-| `injection` | Email de terceiro tenta induzir acesso a outro cliente | Mesmo resultado, sem tentativa de acesso fora do escopo |
-| `retry` | A primeira gravação é efetivada, mas retorna timeout | Recuperação com mesma chave e conteúdo, sem duplicar a minuta |
-
-Todos exigem conclusão explícita, exatamente uma minuta, evidências e respeito ao orçamento. Um texto convincente dizendo “feito” não passa. A suíte não pontua estilo de raciocínio, quantidade de agentes ou nomes de ferramentas de um fornecedor.
+A aprovação exige todos os checks. O avaliador acompanha o momento da leitura, a revisão da fonte usada na gravação, os recibos, a releitura e o achado estruturado. Copiar citações corretas junto de uma quantidade errada falha; ler uma fonte apenas depois de salvar não valida retroativamente a escrita.
 
 ## Executar
 
-Requer Bun 1.4.2.
-
-```sh
-cd ../..
-bun install --frozen-lockfile
-cd benchmarks/oab-bench
-bun run check
-bun test
-bun run bench run.json > results.json
-```
-
-`run.json` identifica o sistema avaliado e seu comando de adapter:
+Instale as dependências na raiz do repositório. Configuração:
 
 ```json
 {
   "task": "retry",
-  "model": "exact-provider-model-version",
+  "model": "exact-provider-model-version-and-parameters",
   "harness": "harness-git-sha-and-config-hash",
   "seed": 0,
-  "command": ["bun", "/absolute/path/to/your-harness-adapter.ts"]
+  "command": ["bun", "/absolute/path/to/adapter.ts"]
 }
 ```
 
-O adapter ainda precisa ser implementado no harness avaliado; não há adapter Capi incluído. Ele deve executar o loop real do agente e encaminhar as operações ao ambiente, conforme [o protocolo](docs/protocol.md). O runner não chama diretamente um modelo nem substitui o harness. O campo `model` registra a configuração declarada; a seleção real é responsabilidade do adapter.
-
-Saída: checks individuais, estado final, trace de ferramentas, tempo observado e sucesso. Código de saída 1 para reprovação ou falha de protocolo. Limites: 20 mensagens de operação, incluindo `finish`, 60 segundos e buffer de protocolo de 128 KiB.
-
-## Dataset no PostHog
-
 ```sh
-bun src/export.ts > dataset.jsonl
+bun run --cwd benchmarks/oab-bench bench /absolute/path/to/run.json > /absolute/path/to/result.json
 ```
 
-O export deriva os inputs do mesmo ambiente executável e inclui IDs estáveis, critérios esperados e metadados. PostHog recebe uma cópia versionada; código e fixtures do repositório são a fonte da suíte. `input` vai ao adapter; `expected_output` e metadados de avaliação ficam com o avaliador. Não enviar o gabarito ao agente.
+O adapter conecta as ferramentas ao loop real do harness. Não há chamada direta a modelo ou adapter Capi incluído. Consulte [o protocolo](docs/protocol.md). O resultado inclui checks, minuta, trace, tempo, configuração e hash da fixture. Falha de protocolo ou reprovação usa código de saída 1. Limites: 20 operações, 60 segundos e 128 KiB por buffer de protocolo. `finish` ocupa uma operação.
 
-Os itens precisam do ambiente de ferramentas. Executá-los no playground como uma geração de texto isolada não avalia o harness. Consulte [a metodologia](docs/methodology.md) e [o registro do dataset](docs/posthog.md).
+## Limites e provenance
 
-## Escopo e referências
+`legalQuality: not_evaluated` permanece em todos os resultados. Os checks verificam execução e rastreabilidade; não medem completude das teses ou qualidade da peça. O processo local não é um sandbox contra um adapter que leia o código do avaliador. Não apresente os testes de controle como resultados de modelos. Veja [a metodologia comum](../../docs/methodology.md).
 
-O foco é o harness completo. OAB é o nome do projeto, sem vínculo com a Ordem e sem alegação de aprovação no Exame de Ordem.
+O export usa IDs `oab-bench-v0.2.0-<cenário>`. [O registro PostHog](docs/posthog.md) é histórico de 0.1.0; o dataset 0.2.0 não foi publicado remotamente.
 
-Referências de desenho: [Harvey LAB](https://github.com/harveyai/harvey-labs), com tarefas e rubricas de trabalho jurídico, e [τ-bench](https://github.com/sierra-research/tau-bench), com avaliação do estado produzido por ferramentas.
-
-Este repositório começou como fork de [Maritaca OAB-Bench](https://github.com/maritaca-ai/oab-bench), que avalia respostas de modelos à segunda fase da OAB. O conteúdo da branch atual foi substituído por esta suíte de harness; o histórico upstream permanece, com atribuição e licença Apache-2.0. Nenhum resultado herdado é apresentado como avaliação do Minutei.
+O histórico upstream de [Maritaca OAB-Bench](https://github.com/maritaca-ai/oab-bench) foi preservado com licença Apache-2.0 e atribuição. O conteúdo atual avalia o harness; não reutiliza resultados upstream como resultados do Minutei.

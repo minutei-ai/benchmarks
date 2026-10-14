@@ -50,17 +50,13 @@
         {
           "id": "notice_july",
           "value": "60",
-          "sources": [
-            "S1-D1"
-          ],
+          "sources": ["S1-D1"],
           "rationale": "Regra histórica."
         },
         {
           "id": "notice_september",
           "value": "30",
-          "sources": [
-            "S2-D1"
-          ],
+          "sources": ["S2-D1"],
           "rationale": "Regra atualizada."
         }
       ]

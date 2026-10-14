@@ -46,33 +46,25 @@
     {
       "id": "monthly_fee_cents",
       "value": "1200000",
-      "sources": [
-        "D02"
-      ],
+      "sources": ["D02"],
       "rationale": "Preço já aceito."
     },
     {
       "id": "initial_months",
       "value": "12",
-      "sources": [
-        "D02"
-      ],
+      "sources": ["D02"],
       "rationale": "Não confundir renovação com prazo inicial."
     },
     {
       "id": "required_sla",
       "value": "99.5",
-      "sources": [
-        "D03"
-      ],
+      "sources": ["D03"],
       "rationale": "Requisito técnico."
     },
     {
       "id": "export_days",
       "value": "30",
-      "sources": [
-        "D03"
-      ],
+      "sources": ["D03"],
       "rationale": "Antes da eliminação."
     }
   ],
@@ -91,28 +83,45 @@
   "rubric": [
     {
       "id": "R1",
-      "criterion": "Preserva preço e prazo inicial aceitos.",
-      "critical": true
+      "criterion": "As cláusulas propostas preservam o preço mensal de R$ 12.000 aprovado.",
+      "artifacts": ["replacement_clauses"],
+      "sources": ["D02"]
     },
     {
       "id": "R2",
-      "criterion": "SLA proposto é mensurável e trata incidentes, exclusões e créditos sem inventar percentual aceito.",
-      "critical": true
+      "criterion": "As cláusulas propostas preservam o prazo inicial de 12 meses aprovado.",
+      "artifacts": ["replacement_clauses"],
+      "sources": ["D02"]
     },
     {
       "id": "R3",
-      "criterion": "Substitui renovação automática por acordo expresso conforme instrução.",
-      "critical": true
+      "criterion": "O SLA proposto fixa disponibilidade mensurável de 99,5% e delimita aferição e exclusões.",
+      "artifacts": ["replacement_clauses"],
+      "sources": ["D03"]
     },
     {
       "id": "R4",
-      "criterion": "Prevê exportação de 30 dias e trata eliminação com ressalva de retenções obrigatórias.",
-      "critical": true
+      "criterion": "As cláusulas identificam créditos e outras condições não aprovadas como propostas, sem inventar percentuais aceitos.",
+      "artifacts": ["replacement_clauses"],
+      "sources": ["D03", "D04"]
     },
     {
       "id": "R5",
-      "criterion": "Identifica propostas e pontos pendentes sem afirmar consenso inexistente.",
-      "critical": true
+      "criterion": "As cláusulas substituem renovação automática por acordo expresso.",
+      "artifacts": ["replacement_clauses"],
+      "sources": ["D04"]
+    },
+    {
+      "id": "R6",
+      "criterion": "As cláusulas preservam janela de exportação de 30 dias e ressalvam retenções obrigatórias na eliminação.",
+      "artifacts": ["replacement_clauses"],
+      "sources": ["D03", "D04"]
+    },
+    {
+      "id": "R7",
+      "criterion": "A matriz distingue riscos da minuta recebida e pontos pendentes de negociação, sem afirmar consenso.",
+      "artifacts": ["risk_matrix"],
+      "sources": ["D01", "D04"]
     }
   ]
 }

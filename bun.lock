@@ -4,11 +4,20 @@
   "workspaces": {
     "": {
       "name": "@minutei/benchmarks",
+      "dependencies": {
+        "@minutei/benchmark": "workspace:*",
+        "effect": "4.0.0-rc.115",
+      },
+      "devDependencies": {
+        "@types/bun": "1.4.2",
+        "typescript": "6.0.3",
+      },
     },
     "benchmarks/legal-longcase-bench": {
       "name": "@minutei/legal-longcase-bench",
-      "version": "0.1.0",
+      "version": "0.2.0",
       "dependencies": {
+        "@minutei/benchmark": "workspace:*",
         "effect": "4.0.0-rc.115",
       },
       "devDependencies": {
@@ -18,8 +27,9 @@
     },
     "benchmarks/legal-memory-bench": {
       "name": "@minutei/legal-memory-bench",
-      "version": "0.1.0",
+      "version": "0.2.0",
       "dependencies": {
+        "@minutei/benchmark": "workspace:*",
         "effect": "4.0.0-rc.115",
       },
       "devDependencies": {
@@ -29,8 +39,9 @@
     },
     "benchmarks/legal-task-bench": {
       "name": "@minutei/legal-task-bench",
-      "version": "0.1.0",
+      "version": "0.2.0",
       "dependencies": {
+        "@minutei/benchmark": "workspace:*",
         "effect": "4.0.0-rc.115",
       },
       "devDependencies": {
@@ -40,7 +51,17 @@
     },
     "benchmarks/oab-bench": {
       "name": "@minutei/oab-bench",
-      "version": "0.1.0",
+      "version": "0.2.0",
+      "dependencies": {
+        "effect": "4.0.0-rc.115",
+      },
+      "devDependencies": {
+        "@types/bun": "1.4.2",
+        "typescript": "6.0.3",
+      },
+    },
+    "packages/benchmark": {
+      "name": "@minutei/benchmark",
       "dependencies": {
         "effect": "4.0.0-rc.115",
       },
@@ -51,6 +72,8 @@
     },
   },
   "packages": {
+    "@minutei/benchmark": ["@minutei/benchmark@workspace:packages/benchmark"],
+
     "@minutei/legal-longcase-bench": ["@minutei/legal-longcase-bench@workspace:benchmarks/legal-longcase-bench"],
 
     "@minutei/legal-memory-bench": ["@minutei/legal-memory-bench@workspace:benchmarks/legal-memory-bench"],

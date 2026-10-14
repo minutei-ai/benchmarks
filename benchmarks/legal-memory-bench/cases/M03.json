@@ -56,9 +56,7 @@
         {
           "id": "next_step",
           "value": "solicitar novo mandato",
-          "sources": [
-            "S2-D1"
-          ],
+          "sources": ["S2-D1"],
           "rationale": "A revogação registra a próxima providência."
         }
       ]

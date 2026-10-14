@@ -47,27 +47,19 @@
     {
       "id": "excess_cents",
       "value": "18990",
-      "sources": [
-        "D01",
-        "D02"
-      ],
+      "sources": ["D01", "D02"],
       "rationale": "Uma das duas mensalidades."
     },
     {
       "id": "double_excess_cents",
       "value": "37980",
-      "sources": [
-        "D01",
-        "D02"
-      ],
+      "sources": ["D01", "D02"],
       "rationale": "Duas vezes 18990; não é resultado garantido."
     },
     {
       "id": "negative_credit_record",
       "value": "não",
-      "sources": [
-        "D04"
-      ],
+      "sources": ["D04"],
       "rationale": "Relato não traz negativação."
     }
   ],
@@ -86,28 +78,39 @@
   "rubric": [
     {
       "id": "R1",
-      "criterion": "Demonstra a duplicidade e requer solução com indicação dos documentos.",
-      "critical": true
+      "criterion": "A reclamação demonstra a cobrança duplicada com fatura e extrato.",
+      "artifacts": ["complaint"],
+      "sources": ["D01", "D02"]
     },
     {
       "id": "R2",
-      "criterion": "Distingue R$ 189,90 de excesso de R$ 379,80 como possível dobro, sem dobrar o total pago.",
-      "critical": true
+      "criterion": "A análise distingue o excesso de R$ 189,90 do possível dobro de R$ 379,80.",
+      "artifacts": ["analysis"],
+      "sources": ["D01", "D02"]
     },
     {
       "id": "R3",
-      "criterion": "Trata ressalvas da restituição em dobro e não garante dano moral automático.",
-      "critical": true
+      "criterion": "A análise apresenta as ressalvas da restituição em dobro fornecidas na referência.",
+      "artifacts": ["analysis"],
+      "sources": ["L01"]
     },
     {
       "id": "R4",
-      "criterion": "Respeita a preferência por tentativa administrativa e a ausência de envio autorizado.",
-      "critical": true
+      "criterion": "A análise não promete dano moral automático.",
+      "artifacts": ["analysis"],
+      "sources": ["D04", "L01"]
     },
     {
       "id": "R5",
-      "criterion": "Indica limitações de pesquisa e prova sem fabricar jurisprudência ou fatos.",
-      "critical": true
+      "criterion": "A reclamação preserva a tentativa administrativa e não afirma envio realizado.",
+      "artifacts": ["complaint"],
+      "sources": ["D04"]
+    },
+    {
+      "id": "R6",
+      "criterion": "A análise identifica limitações de prova e pesquisa sem fabricar jurisprudência ou negativação.",
+      "artifacts": ["analysis"],
+      "sources": ["D04", "L01"]
     }
   ]
 }

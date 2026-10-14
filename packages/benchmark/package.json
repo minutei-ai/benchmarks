@@ -1,0 +1,22 @@
+{
+  "name": "@minutei/benchmark",
+  "private": true,
+  "license": "MIT",
+  "type": "module",
+  "exports": {
+    "./contracts": "./src/contracts.ts",
+    "./adapter": "./src/adapter.ts",
+    "./evaluate": "./src/evaluate.ts"
+  },
+  "scripts": {
+    "check": "tsc --noEmit",
+    "test": "bun test"
+  },
+  "dependencies": {
+    "effect": "4.0.0-rc.115"
+  },
+  "devDependencies": {
+    "@types/bun": "1.4.2",
+    "typescript": "6.0.3"
+  }
+}

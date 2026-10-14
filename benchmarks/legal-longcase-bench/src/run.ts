@@ -1,10 +1,17 @@
-import { Effect, Schema } from "effect";
+import { Cause, Clock, Effect, Schema } from "effect";
 import { mkdtemp, rm } from "node:fs/promises";
 import { tmpdir } from "node:os";
-import { join } from "node:path";
-import { AgentConfig, Submission } from "./contracts";
+import { join, resolve } from "node:path";
+import {
+  AgentConfig,
+  Document,
+  Submission,
+  WorkInput,
+  WorkRecord,
+} from "@minutei/benchmark/contracts";
+import { AdapterExit, runProcess } from "@minutei/benchmark/adapter";
+import { caseDigest, evaluate } from "@minutei/benchmark/evaluate";
 import { loadCase, manifest } from "./cases";
-import { evaluate } from "./evaluate";
 
 const run = Effect.fn("benchmark.run")(function* () {
   const configPath = process.argv[2];
@@ -13,33 +20,83 @@ const run = Effect.fn("benchmark.run")(function* () {
   const config = yield* Schema.decodeUnknownEffect(Schema.fromJsonString(AgentConfig))(raw);
   if (!config.command.length) return yield* Effect.fail("An agent adapter command is required");
   const data = yield* Effect.tryPromise(() => loadCase(config.caseId));
-  const directory = yield* Effect.acquireRelease(
-    Effect.tryPromise(() => mkdtemp(join(tmpdir(), `${manifest.name}-`))),
-    (path) => Effect.promise(() => rm(path, { recursive: true, force: true })),
+  const outputPath = resolve(config.output);
+  const started = yield* Clock.currentTimeMillis;
+  const metadata = {
+    benchmark: manifest.name,
+    version: manifest.version,
+    config,
+    fixtureDigest: caseDigest(data),
+  };
+  const record = yield* Effect.scoped(
+    Effect.gen(function* () {
+      const directory = yield* Effect.acquireRelease(
+        Effect.tryPromise(() => mkdtemp(join(tmpdir(), `${manifest.name}-`))),
+        (path) => Effect.promise(() => rm(path, { recursive: true, force: true })),
+      );
+      const documentsFile = join(directory, "documents.jsonl");
+      yield* Effect.tryPromise(() =>
+        Bun.write(
+          documentsFile,
+          data.documents
+            .map((document) => Schema.encodeSync(Schema.fromJsonString(Document))(document))
+            .join("\n") + "\n",
+        ),
+      );
+      const payload = Schema.encodeSync(Schema.fromJsonString(WorkInput))({
+        benchmark: manifest.name,
+        model: config.model,
+        harness: config.harness,
+        caseId: data.id,
+        request: data.request,
+        questions: data.questions,
+        deliverables: data.deliverables,
+        documentsFile,
+        instruction:
+          "Read documents using your native tools. Return JSON {caseId,answers:[{id,value,citations:[{documentId,quote}]}],artifacts:[{id,body}]}. Do not include review: review belongs to an independent reviewer.",
+      });
+      const result = yield* runProcess(config, directory, payload, `${outputPath}.stderr.log`);
+      if (result.code !== 0)
+        return yield* Effect.fail(
+          new AdapterExit({
+            code: result.code,
+            elapsedMs: result.elapsedMs,
+            stderrPath: result.stderrPath,
+          }),
+        );
+      const submission = yield* Schema.decodeUnknownEffect(Schema.fromJsonString(Submission))(
+        result.output,
+      );
+      if (submission.review) return yield* Effect.fail("Agent cannot submit its own review");
+      const report = evaluate(data, submission);
+      return {
+        ...metadata,
+        status: "completed" as const,
+        elapsedMs: (yield* Clock.currentTimeMillis) - started,
+        submission,
+        report,
+        failure: null,
+      };
+    }),
+  ).pipe(
+    Effect.catchCause((cause) =>
+      Effect.gen(function* () {
+        return {
+          ...metadata,
+          status: "execution_failed" as const,
+          elapsedMs: (yield* Clock.currentTimeMillis) - started,
+          submission: null,
+          report: null,
+          failure: Cause.pretty(cause),
+        };
+      }),
+    ),
   );
-  const started = performance.now();
-  yield* Effect.tryPromise(() => Bun.write(join(directory, "documents.jsonl"), data.documents.map((doc) => JSON.stringify(doc)).join("\n") + "\n"));
-  const payload = { benchmark: manifest.name, model: config.model, harness: config.harness, caseId: data.id, request: data.request, questions: data.questions, deliverables: data.deliverables, documentsFile: join(directory, "documents.jsonl"), instruction: "Read documents using your native tools. Return JSON {caseId,answers:[{id,value,citations:[{documentId,quote}]}],artifacts:[{id,body}]}. Do not include review: review belongs to an independent reviewer." };
-  const submission = yield* Effect.scoped(Effect.gen(function* () {
-    const child = yield* Effect.acquireRelease(
-      Effect.sync(() => Bun.spawn([...config.command], { cwd: directory, stdin: new Blob([JSON.stringify(payload)]), stdout: "pipe", stderr: "inherit", timeout: config.timeoutMs ?? 300000, killSignal: "SIGKILL" })),
-      (proc) => Effect.promise(async () => { proc.kill("SIGKILL"); await proc.exited; }),
-    );
-    const output = yield* Effect.tryPromise(() => new Response(child.stdout).text());
-    const code = yield* Effect.promise(() => child.exited);
-    if (code !== 0) {
-        console.error(output);
-        return yield* Effect.fail(`Adapter exited with status ${code}`);
-      }
-    const result = yield* Schema.decodeUnknownEffect(Schema.fromJsonString(Submission))(output);
-    if (result.review) return yield* Effect.fail("Agent cannot submit its own review");
-    return result;
-  }));
-  const report = evaluate(data, submission);
-  const record = { benchmark: manifest.name, version: manifest.version, config, elapsedMs: performance.now() - started, submission, report };
-  yield* Effect.tryPromise(() => Bun.write(config.output, JSON.stringify(record, null, 2) + "\n"));
-  console.log(JSON.stringify(report, null, 2));
-  if (!report.passed) process.exitCode = 1;
+  yield* Effect.tryPromise(() =>
+    Bun.write(outputPath, Schema.encodeSync(Schema.fromJsonString(WorkRecord))(record) + "\n"),
+  );
+  console.log(Schema.encodeSync(Schema.fromJsonString(WorkRecord))(record));
+  if (record.status === "execution_failed" || !record.report?.passed) process.exitCode = 1;
 });
 
 await Effect.runPromise(Effect.scoped(run()));

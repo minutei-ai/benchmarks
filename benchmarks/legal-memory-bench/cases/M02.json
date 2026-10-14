@@ -50,17 +50,13 @@
         {
           "id": "ceiling_cents",
           "value": "1200000",
-          "sources": [
-            "S1-D1"
-          ],
+          "sources": ["S1-D1"],
           "rationale": "Valor do processo correto."
         },
         {
           "id": "object",
           "value": "aluguel da sala 12",
-          "sources": [
-            "S1-D1"
-          ],
+          "sources": ["S1-D1"],
           "rationale": "Não importar fato do caso de consumo."
         }
       ]
