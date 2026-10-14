@@ -1,0 +1,14 @@
+{
+  "name": "@minutei/oab-bench",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "license": "Apache-2.0",
+  "scripts": {
+    "check": "tsc --noEmit",
+    "test": "bun test",
+    "bench": "bun src/cli.ts"
+  },
+  "dependencies": { "effect": "4.0.0-rc.115" },
+  "devDependencies": { "@types/bun": "1.4.2", "typescript": "6.0.3" }
+}
