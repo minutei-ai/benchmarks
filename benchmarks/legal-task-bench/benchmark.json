@@ -1,0 +1,17 @@
+{
+  "name": "legal-task-bench",
+  "version": "0.1.1",
+  "description": "Tarefas jurídicas completas, com entregas, verificações factuais e rubricas de revisão.",
+  "language": "pt-BR",
+  "synthetic": true,
+  "status": "initial_public_suite",
+  "legalReview": "pending",
+  "cases": [
+    "T01",
+    "T02",
+    "T03",
+    "T04",
+    "T05",
+    "T06"
+  ]
+}

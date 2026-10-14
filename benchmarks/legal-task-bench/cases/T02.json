@@ -1,0 +1,119 @@
+{
+  "id": "T02",
+  "title": "Defesa em cobrança com pagamentos omitidos",
+  "request": "Você representa o réu Brisa Serviços Ltda. Prepare minuta de contestação e quadro de conciliação financeira para revisão do advogado. Impugne especificamente a cobrança com base no dossiê. Não invente número do processo, foro ou termo inicial do prazo; registre o que falta para finalizar. Não protocolar.",
+  "documents": [
+    {
+      "id": "D01",
+      "title": "Petição inicial disponibilizada",
+      "text": "Cedro Software Ltda. cobra R$ 72.000,00 de Brisa Serviços Ltda., referentes a três faturas de R$ 24.000,00: F101, F102 e F103. Afirma que nada foi pago. O trecho fornecido não informa número do processo nem juízo."
+    },
+    {
+      "id": "D02",
+      "title": "Liquidação F101",
+      "text": "Comprovante conciliado: F101, R$ 24.000,00, paga integralmente em 03/06/2026. Beneficiário Cedro Software Ltda."
+    },
+    {
+      "id": "D03",
+      "title": "Liquidação F102",
+      "text": "Comprovante conciliado: F102, R$ 24.000,00, paga integralmente em 02/07/2026. Beneficiário Cedro Software Ltda."
+    },
+    {
+      "id": "D04",
+      "title": "Liquidação parcial F103",
+      "text": "Comprovante conciliado: F103, pagamento parcial de R$ 6.000,00 em 04/08/2026. Beneficiário Cedro Software Ltda. Não há prova de quitação dos R$ 18.000,00 restantes."
+    },
+    {
+      "id": "D05",
+      "title": "Mandato de preparação",
+      "text": "O cliente confirma os serviços e os valores das faturas. Contesta a ausência de abatimento dos pagamentos. A certidão de citação ainda não foi disponibilizada. Nenhuma instrução autoriza negar genericamente o contrato ou alegar quitação integral."
+    },
+    {
+      "id": "L01",
+      "title": "Referências de processo civil",
+      "text": "Fonte oficial consultada em 27/09/2026: https://www.planalto.gov.br/ccivil_03/_ato2015-2018/2015/lei/l13105.htm . Referências de trabalho: CPC arts. 336 e 341, defesa e impugnação específica; art. 373, distribuição do ônus da prova. Não calcular vencimento sem os dados processuais necessários."
+    }
+  ],
+  "questions": [
+    {
+      "id": "paid_cents",
+      "prompt": "Total de pagamentos comprovados, em centavos?"
+    },
+    {
+      "id": "unpaid_principal_cents",
+      "prompt": "Principal ainda sem prova de pagamento, em centavos?"
+    },
+    {
+      "id": "filing_deadline",
+      "prompt": "Data final do prazo de defesa? Use null se não determinável."
+    }
+  ],
+  "expected": [
+    {
+      "id": "paid_cents",
+      "value": "5400000",
+      "sources": [
+        "D02",
+        "D03",
+        "D04"
+      ],
+      "rationale": "24 mil + 24 mil + 6 mil."
+    },
+    {
+      "id": "unpaid_principal_cents",
+      "value": "1800000",
+      "sources": [
+        "D01",
+        "D02",
+        "D03",
+        "D04"
+      ],
+      "rationale": "72 mil - 54 mil."
+    },
+    {
+      "id": "filing_deadline",
+      "value": null,
+      "sources": [],
+      "rationale": "Citação não fornecida."
+    }
+  ],
+  "deliverables": [
+    {
+      "id": "defense",
+      "title": "Minuta de contestação",
+      "minWords": 220
+    },
+    {
+      "id": "reconciliation",
+      "title": "Quadro de conciliação e pendências",
+      "minWords": 100
+    }
+  ],
+  "rubric": [
+    {
+      "id": "R1",
+      "criterion": "Impugna a narrativa de inadimplemento integral com pagamentos vinculados a cada fatura.",
+      "critical": true
+    },
+    {
+      "id": "R2",
+      "criterion": "Não alega quitação total nem transforma a falta de prova de pagamento do saldo em fato diverso.",
+      "critical": true
+    },
+    {
+      "id": "R3",
+      "criterion": "Formula defesa e pedidos coerentes com abatimento, distinguindo principal de encargos não calculados.",
+      "critical": true
+    },
+    {
+      "id": "R4",
+      "criterion": "Explicita documentos faltantes e não inventa tempestividade, processo ou juízo.",
+      "critical": true
+    },
+    {
+      "id": "R5",
+      "criterion": "Quadro financeiro fecha em R$ 54.000 pagos e R$ 18.000 de principal residual.",
+      "critical": true
+    }
+  ]
+}

@@ -1,0 +1,118 @@
+{
+  "id": "T04",
+  "title": "Revisão de contrato de tecnologia",
+  "request": "Você representa a contratante Estrela. Entregue matriz de riscos e redação substitutiva das cláusulas de SLA, renovação e exportação de dados. Mantenha as condições comerciais aceitas e exponha escolhas que dependem de negociação. Não apresentar cláusulas propostas como já aceitas.",
+  "documents": [
+    {
+      "id": "D01",
+      "title": "Minuta recebida",
+      "text": "Contrato de suporte: R$ 12.000,00 mensais, vigência inicial de 12 meses. Cláusula 4: disponibilidade de 95% medida pela contratada, sem créditos. Cláusula 8: renovação automática por 24 meses, denúncia com antecedência de 120 dias. Cláusula 11: dados apagados imediatamente ao término, sem exportação."
+    },
+    {
+      "id": "D02",
+      "title": "Condições comerciais aprovadas",
+      "text": "Estrela aceitou preço mensal de R$ 12.000,00 e prazo inicial de 12 meses. Não aprovou modificação de preço, nem as cláusulas 4, 8 e 11."
+    },
+    {
+      "id": "D03",
+      "title": "Requisitos técnicos",
+      "text": "Área técnica exige disponibilidade de 99,5% com relatório verificável, comunicação de incidentes e regra clara de exclusões. Precisa de 30 dias após término para exportar os dados antes da eliminação, ressalvadas retenções obrigatórias."
+    },
+    {
+      "id": "D04",
+      "title": "Instrução negocial",
+      "text": "Jurídico propõe renovação somente por acordo expresso. Créditos por descumprimento de SLA dependem de negociação; não existe percentual autorizado. A contraparte ainda não aprovou as alterações."
+    }
+  ],
+  "questions": [
+    {
+      "id": "monthly_fee_cents",
+      "prompt": "Preço mensal aprovado em centavos?"
+    },
+    {
+      "id": "initial_months",
+      "prompt": "Vigência inicial aprovada em meses?"
+    },
+    {
+      "id": "required_sla",
+      "prompt": "Disponibilidade requerida, em percentual com ponto decimal?"
+    },
+    {
+      "id": "export_days",
+      "prompt": "Janela de exportação requerida em dias?"
+    }
+  ],
+  "expected": [
+    {
+      "id": "monthly_fee_cents",
+      "value": "1200000",
+      "sources": [
+        "D02"
+      ],
+      "rationale": "Preço já aceito."
+    },
+    {
+      "id": "initial_months",
+      "value": "12",
+      "sources": [
+        "D02"
+      ],
+      "rationale": "Não confundir renovação com prazo inicial."
+    },
+    {
+      "id": "required_sla",
+      "value": "99.5",
+      "sources": [
+        "D03"
+      ],
+      "rationale": "Requisito técnico."
+    },
+    {
+      "id": "export_days",
+      "value": "30",
+      "sources": [
+        "D03"
+      ],
+      "rationale": "Antes da eliminação."
+    }
+  ],
+  "deliverables": [
+    {
+      "id": "risk_matrix",
+      "title": "Matriz de riscos",
+      "minWords": 160
+    },
+    {
+      "id": "replacement_clauses",
+      "title": "Cláusulas substitutivas",
+      "minWords": 200
+    }
+  ],
+  "rubric": [
+    {
+      "id": "R1",
+      "criterion": "Preserva preço e prazo inicial aceitos.",
+      "critical": true
+    },
+    {
+      "id": "R2",
+      "criterion": "SLA proposto é mensurável e trata incidentes, exclusões e créditos sem inventar percentual aceito.",
+      "critical": true
+    },
+    {
+      "id": "R3",
+      "criterion": "Substitui renovação automática por acordo expresso conforme instrução.",
+      "critical": true
+    },
+    {
+      "id": "R4",
+      "criterion": "Prevê exportação de 30 dias e trata eliminação com ressalva de retenções obrigatórias.",
+      "critical": true
+    },
+    {
+      "id": "R5",
+      "criterion": "Identifica propostas e pontos pendentes sem afirmar consenso inexistente.",
+      "critical": true
+    }
+  ]
+}

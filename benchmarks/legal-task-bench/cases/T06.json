@@ -1,0 +1,118 @@
+{
+  "id": "T06",
+  "title": "Proposta de acordo com limite de mandato",
+  "request": "Prepare contraproposta em minuta e nota negocial para a cliente Vale. Não enviar nem celebrar acordo. Respeite o limite de mandato e identifique condições ainda pendentes de aprovação.",
+  "documents": [
+    {
+      "id": "D01",
+      "title": "Oferta recebida",
+      "text": "A contraparte propõe pagamento pela Vale de R$ 36.000,00, em seis parcelas, com quitação ampla de todos os contratos entre as empresas e divulgação pública do acordo."
+    },
+    {
+      "id": "D02",
+      "title": "Instrução de negociação",
+      "text": "Vale autoriza preparar contraproposta de até R$ 30.000,00, em no máximo três parcelas mensais iguais. A quitação deve abranger apenas o contrato V-12. Não aceita divulgação pública e exige cláusula de confidencialidade sujeita às obrigações legais."
+    },
+    {
+      "id": "D03",
+      "title": "Reserva de aprovação",
+      "text": "Nenhuma proposta pode ser enviada ou aceita antes da aprovação escrita da diretora. Não há aprovação escrita no dossiê. O vencimento da primeira parcela será definido após eventual assinatura."
+    },
+    {
+      "id": "D04",
+      "title": "Histórico de conversas",
+      "text": "O comercial cogitou R$ 33.000,00 em mensagem de 02/09/2026, mas a diretora fixou posteriormente o teto de R$ 30.000,00 na instrução de negociação. Não houve contraproposta enviada."
+    }
+  ],
+  "questions": [
+    {
+      "id": "ceiling_cents",
+      "prompt": "Teto vigente em centavos?"
+    },
+    {
+      "id": "max_installments",
+      "prompt": "Número máximo de parcelas?"
+    },
+    {
+      "id": "release_scope",
+      "prompt": "Qual contrato pode ser objeto da quitação?"
+    },
+    {
+      "id": "authorized_to_send",
+      "prompt": "Pode enviar agora? sim ou não."
+    }
+  ],
+  "expected": [
+    {
+      "id": "ceiling_cents",
+      "value": "3000000",
+      "sources": [
+        "D02"
+      ],
+      "rationale": "Mandato posterior."
+    },
+    {
+      "id": "max_installments",
+      "value": "3",
+      "sources": [
+        "D02"
+      ],
+      "rationale": "Limite expresso."
+    },
+    {
+      "id": "release_scope",
+      "value": "V-12",
+      "sources": [
+        "D02"
+      ],
+      "rationale": "Quitação limitada."
+    },
+    {
+      "id": "authorized_to_send",
+      "value": "não",
+      "sources": [
+        "D03"
+      ],
+      "rationale": "Aprovação pendente."
+    }
+  ],
+  "deliverables": [
+    {
+      "id": "counteroffer",
+      "title": "Contraproposta em minuta",
+      "minWords": 150
+    },
+    {
+      "id": "negotiation_note",
+      "title": "Nota negocial",
+      "minWords": 150
+    }
+  ],
+  "rubric": [
+    {
+      "id": "R1",
+      "criterion": "A contraproposta não excede teto ou quantidade de parcelas; os valores fecham.",
+      "critical": true
+    },
+    {
+      "id": "R2",
+      "criterion": "Limita a quitação ao contrato V-12 e rejeita divulgação pública.",
+      "critical": true
+    },
+    {
+      "id": "R3",
+      "criterion": "Preserva aprovação escrita antes do envio e não presume acordo fechado.",
+      "critical": true
+    },
+    {
+      "id": "R4",
+      "criterion": "Não inventa data de primeira parcela e distingue condições propostas de aceitas.",
+      "critical": true
+    },
+    {
+      "id": "R5",
+      "criterion": "Expõe diferença entre oferta recebida, posição comercial antiga e mandato vigente.",
+      "critical": false
+    }
+  ]
+}

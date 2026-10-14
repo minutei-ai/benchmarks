@@ -1,0 +1,113 @@
+{
+  "id": "T03",
+  "title": "Cobrança duplicada de consumidor",
+  "request": "Prepare uma reclamação administrativa em minuta e uma análise de viabilidade de demanda para a consumidora fictícia Lia. Distingua valor pago em excesso de eventual restituição em dobro e de danos morais. A consumidora quer tentar solução administrativa antes de ajuizar. Não enviar.",
+  "documents": [
+    {
+      "id": "D01",
+      "title": "Fatura mensal",
+      "text": "A fatura de setembro da operadora Nuvem tem valor de R$ 189,90 e identifica o contrato C-77. Apenas uma mensalidade era devida."
+    },
+    {
+      "id": "D02",
+      "title": "Extrato de débitos",
+      "text": "No mesmo contrato C-77 constam dois débitos liquidados de R$ 189,90, nos dias 05/09/2026 e 06/09/2026. Não houve estorno até 18/09/2026."
+    },
+    {
+      "id": "D03",
+      "title": "Atendimento",
+      "text": "Protocolo P-882 em 08/09/2026: a operadora informou que investigaria duplicidade, sem concluir sobre causa, responsabilidade ou engano justificável."
+    },
+    {
+      "id": "D04",
+      "title": "Relato e preferência",
+      "text": "Lia quer tentativa administrativa antes de ação judicial. Não relata negativação, interrupção de serviço ou outro dano além do pagamento duplicado. Não autoriza envio automático."
+    },
+    {
+      "id": "L01",
+      "title": "Referência consumerista",
+      "text": "Fonte oficial consultada em 27/09/2026: https://www.planalto.gov.br/ccivil_03/leis/l8078compilado.htm . Referência de trabalho: CDC art. 42, parágrafo único, disciplina repetição do indébito em dobro do excesso pago e ressalva engano justificável. O dossiê não contém jurisprudência nem prova da causa da duplicidade; não inventar precedentes."
+    }
+  ],
+  "questions": [
+    {
+      "id": "excess_cents",
+      "prompt": "Qual o excesso efetivamente pago, em centavos?"
+    },
+    {
+      "id": "double_excess_cents",
+      "prompt": "Qual o dobro do excesso, sem juros e correção, em centavos?"
+    },
+    {
+      "id": "negative_credit_record",
+      "prompt": "Há prova de negativação? Responda sim ou não."
+    }
+  ],
+  "expected": [
+    {
+      "id": "excess_cents",
+      "value": "18990",
+      "sources": [
+        "D01",
+        "D02"
+      ],
+      "rationale": "Uma das duas mensalidades."
+    },
+    {
+      "id": "double_excess_cents",
+      "value": "37980",
+      "sources": [
+        "D01",
+        "D02"
+      ],
+      "rationale": "Duas vezes 18990; não é resultado garantido."
+    },
+    {
+      "id": "negative_credit_record",
+      "value": "não",
+      "sources": [
+        "D04"
+      ],
+      "rationale": "Relato não traz negativação."
+    }
+  ],
+  "deliverables": [
+    {
+      "id": "complaint",
+      "title": "Reclamação administrativa",
+      "minWords": 130
+    },
+    {
+      "id": "analysis",
+      "title": "Análise de viabilidade",
+      "minWords": 180
+    }
+  ],
+  "rubric": [
+    {
+      "id": "R1",
+      "criterion": "Demonstra a duplicidade e requer solução com indicação dos documentos.",
+      "critical": true
+    },
+    {
+      "id": "R2",
+      "criterion": "Distingue R$ 189,90 de excesso de R$ 379,80 como possível dobro, sem dobrar o total pago.",
+      "critical": true
+    },
+    {
+      "id": "R3",
+      "criterion": "Trata ressalvas da restituição em dobro e não garante dano moral automático.",
+      "critical": true
+    },
+    {
+      "id": "R4",
+      "criterion": "Respeita a preferência por tentativa administrativa e a ausência de envio autorizado.",
+      "critical": true
+    },
+    {
+      "id": "R5",
+      "criterion": "Indica limitações de pesquisa e prova sem fabricar jurisprudência ou fatos.",
+      "critical": true
+    }
+  ]
+}

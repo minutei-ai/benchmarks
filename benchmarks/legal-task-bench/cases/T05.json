@@ -1,0 +1,104 @@
+{
+  "id": "T05",
+  "title": "Providências após decisão judicial",
+  "request": "Prepare nota ao advogado e checklist de cumprimento da decisão mais recente. Diferencie determinação vigente, trecho revogado e alegação da parte. Extraia somente vencimentos expressos; não calcule datas a partir de prazo relativo sem os marcos necessários.",
+  "documents": [
+    {
+      "id": "D01",
+      "title": "Decisão anterior",
+      "text": "Decisão de 01/09/2026: apresentar planilha e comprovantes em 10 dias. Este documento não informa a data de intimação."
+    },
+    {
+      "id": "D02",
+      "title": "Petição da parte contrária",
+      "text": "A parte contrária sustenta que todos os comprovantes já deveriam ter sido apresentados em 08/09/2026. Trata-se de alegação da parte, não de nova ordem judicial."
+    },
+    {
+      "id": "D03",
+      "title": "Decisão de esclarecimento",
+      "text": "Decisão de 12/09/2026: revogo a determinação de apresentação de comprovantes da decisão anterior. A planilha deverá ser apresentada até 30/09/2026. Intime-se a parte para manifestar-se sobre o laudo em 15 dias."
+    },
+    {
+      "id": "D04",
+      "title": "Andamento disponível",
+      "text": "O dossiê foi exportado em 14/09/2026. Não contém certidão de intimação da decisão de 12/09/2026. O laudo está disponível, mas a memória de cálculo interna precisa de revisão."
+    }
+  ],
+  "questions": [
+    {
+      "id": "spreadsheet_due",
+      "prompt": "Data final expressa para a planilha, em YYYY-MM-DD?"
+    },
+    {
+      "id": "receipts_required",
+      "prompt": "A ordem de juntar comprovantes continua vigente? sim ou não."
+    },
+    {
+      "id": "expert_report_due",
+      "prompt": "Data final da manifestação sobre laudo? Use null se não determinável."
+    }
+  ],
+  "expected": [
+    {
+      "id": "spreadsheet_due",
+      "value": "2026-09-30",
+      "sources": [
+        "D03"
+      ],
+      "rationale": "Data expressamente determinada."
+    },
+    {
+      "id": "receipts_required",
+      "value": "não",
+      "sources": [
+        "D03"
+      ],
+      "rationale": "Ordem revogada."
+    },
+    {
+      "id": "expert_report_due",
+      "value": null,
+      "sources": [],
+      "rationale": "Prazo relativo sem marco de intimação."
+    }
+  ],
+  "deliverables": [
+    {
+      "id": "lawyer_note",
+      "title": "Nota ao advogado",
+      "minWords": 150
+    },
+    {
+      "id": "checklist",
+      "title": "Checklist de providências",
+      "minWords": 100
+    }
+  ],
+  "rubric": [
+    {
+      "id": "R1",
+      "criterion": "Identifica a decisão de esclarecimento como fonte das obrigações vigentes.",
+      "critical": true
+    },
+    {
+      "id": "R2",
+      "criterion": "Separa planilha com data expressa, comprovantes revogados e manifestação com prazo relativo.",
+      "critical": true
+    },
+    {
+      "id": "R3",
+      "criterion": "Não converte alegação da parte em determinação judicial.",
+      "critical": true
+    },
+    {
+      "id": "R4",
+      "criterion": "Solicita a certidão e a revisão da memória de cálculo sem inventar vencimento.",
+      "critical": true
+    },
+    {
+      "id": "R5",
+      "criterion": "Entrega checklist com responsáveis propostos e dependências claramente identificadas.",
+      "critical": false
+    }
+  ]
+}

@@ -1,0 +1,128 @@
+{
+  "id": "T01",
+  "title": "Entrega parcial de equipamentos",
+  "request": "Você representa Aurora Clínica Ltda. Prepare uma notificação extrajudicial em minuta e um parecer interno com alternativas, riscos, evidências e próximos passos. Preserve a opção preferida do cliente e trate a versão do fornecedor. Não enviar ou protocolar. Valores estruturados em centavos, quantidades em inteiros. Dados de qualificação não fornecidos devem permanecer como campos a preencher.",
+  "documents": [
+    {
+      "id": "D01",
+      "title": "Contrato 14/2026",
+      "text": "Aurora Clínica Ltda. contratou Horizonte Equipamentos Ltda. para fornecer 24 monitores a R$ 4.000,00 cada, total de R$ 96.000,00. Entrega integral em 10/08/2026. Entrada de R$ 48.000,00; saldo exigível após aceite integral. Não há cláusula de resolução automática."
+    },
+    {
+      "id": "D02",
+      "title": "Comprovante de pagamento",
+      "text": "Aurora pagou a entrada de R$ 48.000,00 em 02/07/2026. O banco confirmou a liquidação. Nenhum pagamento do saldo consta neste dossiê."
+    },
+    {
+      "id": "D03",
+      "title": "Email do fornecedor",
+      "text": "Em 11/08/2026, Horizonte declarou ter entregue 24 monitores. O email não contém identificação dos números de série nem recibo assinado."
+    },
+    {
+      "id": "D04",
+      "title": "Termo de conferência",
+      "text": "Conferência assinada por ambas as partes em 13/08/2026: foram recebidos 18 monitores; faltam 6 unidades. Os 18 itens recebidos foram aceitos sem ressalva técnica."
+    },
+    {
+      "id": "D05",
+      "title": "Instrução do cliente",
+      "text": "Em 15/08/2026, Aurora informou que prefere receber as 6 unidades faltantes. Autoriza preparar minuta exigindo solução em 10 dias do recebimento da notificação, mas não autoriza envio. Não há prova de lucros cessantes no material entregue."
+    },
+    {
+      "id": "L01",
+      "title": "Referência legislativa fornecida",
+      "text": "Fonte oficial consultada em 27/09/2026: https://www.planalto.gov.br/ccivil_03/leis/2002/l10406compilada.htm . Referência de trabalho, não transcrição: Código Civil, art. 475, permite discutir cumprimento ou resolução por inadimplemento e perdas e danos; art. 476 trata da reciprocidade de prestações em contratos bilaterais. A aplicação depende dos fatos e do contrato."
+    }
+  ],
+  "questions": [
+    {
+      "id": "pending_units",
+      "prompt": "Quantos monitores faltam?"
+    },
+    {
+      "id": "paid_cents",
+      "prompt": "Quanto foi comprovadamente pago, em centavos?"
+    },
+    {
+      "id": "client_preference",
+      "prompt": "Qual a providência preferida: cumprimento ou resolução?"
+    },
+    {
+      "id": "authorized_to_send",
+      "prompt": "O envio está autorizado? Responda sim ou não."
+    }
+  ],
+  "expected": [
+    {
+      "id": "pending_units",
+      "value": "6",
+      "sources": [
+        "D04"
+      ],
+      "rationale": "O termo bilateral declara expressamente que faltam seis unidades; contrato e termo também sustentam o cálculo."
+    },
+    {
+      "id": "paid_cents",
+      "value": "4800000",
+      "sources": [
+        "D02"
+      ],
+      "rationale": "Entrada liquidada."
+    },
+    {
+      "id": "client_preference",
+      "value": "cumprimento",
+      "sources": [
+        "D05"
+      ],
+      "rationale": "A preferência expressa é receber as unidades."
+    },
+    {
+      "id": "authorized_to_send",
+      "value": "não",
+      "sources": [
+        "D05"
+      ],
+      "rationale": "Somente preparação autorizada."
+    }
+  ],
+  "deliverables": [
+    {
+      "id": "notice",
+      "title": "Minuta de notificação",
+      "minWords": 140
+    },
+    {
+      "id": "memo",
+      "title": "Parecer interno",
+      "minWords": 180
+    }
+  ],
+  "rubric": [
+    {
+      "id": "R1",
+      "criterion": "Compatibiliza a entrega parcial com o termo bilateral e enfrenta o email contraditório.",
+      "critical": true
+    },
+    {
+      "id": "R2",
+      "criterion": "A notificação exige as seis unidades e vincula o prazo ao recebimento, sem inventar data final.",
+      "critical": true
+    },
+    {
+      "id": "R3",
+      "criterion": "Distingue cumprimento, resolução e eventual indenização sem prometer resultado ou inventar prejuízo; fundamenta as consequências propostas e mantém consistência entre notificação e parecer, sem introduzir restituição em dobro sem suporte demonstrado.",
+      "critical": true
+    },
+    {
+      "id": "R4",
+      "criterion": "Trata a condição de exigibilidade do saldo à luz do contrato e das referências fornecidas.",
+      "critical": false
+    },
+    {
+      "id": "R5",
+      "criterion": "Mantém qualificações ausentes em aberto, separa minuta e parecer e não afirma ter enviado.",
+      "critical": true
+    }
+  ]
+}
