@@ -1,3 +1,5 @@
+> Este repositório foi consolidado em [minutei-ai/benchmarks](https://github.com/minutei-ai/benchmarks/tree/main/benchmarks/legal-memory-bench). A manutenção continua lá. Casos, avaliadores, licença e histórico Git foram preservados.
+
 # legal-memory-bench
 
 Memória jurídica entre sessões: correção, isolamento, esquecimento, autorização e tempo.
