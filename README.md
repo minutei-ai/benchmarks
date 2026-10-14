@@ -1,3 +1,5 @@
+> Este repositório foi consolidado em [minutei-ai/benchmarks](https://github.com/minutei-ai/benchmarks/tree/main/benchmarks/legal-task-bench). A manutenção continua lá. Casos, avaliadores, licença e histórico Git foram preservados.
+
 # legal-task-bench
 
 Tarefas jurídicas completas, com entregas, verificações factuais e rubricas de revisão.
