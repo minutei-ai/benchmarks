@@ -1,0 +1,148 @@
+{
+  "id": "C01",
+  "title": "Auditoria de entrega e saldo contratual",
+  "request": "Analise o contrato H-220 no acervo. Entregue memorando completo com cronologia das evidências, reconciliação de valores, contradições resolvidas, limitações e próximos passos. Não some informações de outros contratos. Nenhum envio está autorizado. Use as perguntas estruturadas para registrar os fatos; não confunda valor nominal pendente com saldo exigível ou indenização.",
+  "questions": [
+    {
+      "id": "contract_units",
+      "prompt": "Quantidade contratada? "
+    },
+    {
+      "id": "accepted_units",
+      "prompt": "Quantidade aceita na auditoria final?"
+    },
+    {
+      "id": "pending_units",
+      "prompt": "Quantidade pendente?"
+    },
+    {
+      "id": "paid_cents",
+      "prompt": "Adiantamento pago em centavos?"
+    },
+    {
+      "id": "pending_nominal_cents",
+      "prompt": "Valor nominal das unidades pendentes em centavos?"
+    },
+    {
+      "id": "delivery_date",
+      "prompt": "Data contratual de entrega vigente, YYYY-MM-DD?"
+    },
+    {
+      "id": "court_deadline",
+      "prompt": "Vencimento processual? null se não determinável."
+    },
+    {
+      "id": "client_preference",
+      "prompt": "Preferência entre cumprimento e resolução?"
+    }
+  ],
+  "expected": [
+    {
+      "id": "contract_units",
+      "value": "120",
+      "sources": [
+        "C01-D0004"
+      ],
+      "rationale": "Instrumento assinado."
+    },
+    {
+      "id": "accepted_units",
+      "value": "103",
+      "sources": [
+        "C01-D0097"
+      ],
+      "rationale": "Auditoria prevalece sobre email."
+    },
+    {
+      "id": "pending_units",
+      "value": "17",
+      "sources": [
+        "C01-D0004",
+        "C01-D0097"
+      ],
+      "rationale": "Contratado menos aceito."
+    },
+    {
+      "id": "paid_cents",
+      "value": "15000000",
+      "sources": [
+        "C01-D0033"
+      ],
+      "rationale": "Comprovante conciliado, sem somar contratos alheios."
+    },
+    {
+      "id": "pending_nominal_cents",
+      "value": "4250000",
+      "sources": [
+        "C01-D0004",
+        "C01-D0097"
+      ],
+      "rationale": "Quantidade pendente vezes preço; não equivale a indenização ou saldo exigível."
+    },
+    {
+      "id": "delivery_date",
+      "value": "2026-06-20",
+      "sources": [
+        "C01-D0126"
+      ],
+      "rationale": "Aditivo substitui cronograma."
+    },
+    {
+      "id": "court_deadline",
+      "value": null,
+      "sources": [],
+      "rationale": "Nenhum processo identificado."
+    },
+    {
+      "id": "client_preference",
+      "value": "cumprimento",
+      "sources": [
+        "C01-D0128"
+      ],
+      "rationale": "Instrução vigente."
+    }
+  ],
+  "deliverables": [
+    {
+      "id": "memorandum",
+      "title": "Memorando do dossiê",
+      "minWords": 300
+    },
+    {
+      "id": "evidence_map",
+      "title": "Mapa de evidências e contradições",
+      "minWords": 140
+    }
+  ],
+  "rubric": [
+    {
+      "id": "R1",
+      "criterion": "Encontra e conecta contrato, pagamento, email, auditoria, aditivo e mandato, sem misturar contratos.",
+      "critical": true
+    },
+    {
+      "id": "R2",
+      "criterion": "Explica a divergência entre email e auditoria; usa o aceite efetivo.",
+      "critical": true
+    },
+    {
+      "id": "R3",
+      "criterion": "Reconcilia unidades e valores com demonstração de cálculo, sem tratar estimativa como indenização.",
+      "critical": true
+    },
+    {
+      "id": "R4",
+      "criterion": "Aplica o aditivo vigente e não fabrica prazo judicial ou autorização.",
+      "critical": true
+    },
+    {
+      "id": "R5",
+      "criterion": "Entrega análise coerente e rastreável, reconhecendo lacunas sem transformar ruído em fatos.",
+      "critical": true
+    }
+  ],
+  "documentsFile": "fixtures/C01.jsonl",
+  "documentCount": 128,
+  "documentCharacters": 579461,
+  "documentBytes": 599600
+}
