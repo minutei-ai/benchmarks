@@ -1,0 +1,156 @@
+{
+  "id": "C04",
+  "title": "Dossiê pareado H-220 com 128 documentos",
+  "request": "Analise o contrato H-220 no acervo. Entregue memorando completo com cronologia das evidências, reconciliação de valores, contradições resolvidas, limitações e próximos passos. Não some informações de outros contratos. Nenhum envio está autorizado. Use as perguntas estruturadas para registrar os fatos; não confunda valor nominal pendente com saldo exigível ou indenização.",
+  "questions": [
+    {
+      "id": "contract_units",
+      "prompt": "Quantidade contratada? "
+    },
+    {
+      "id": "accepted_units",
+      "prompt": "Quantidade aceita na auditoria final?"
+    },
+    {
+      "id": "pending_units",
+      "prompt": "Quantidade pendente?"
+    },
+    {
+      "id": "paid_cents",
+      "prompt": "Adiantamento pago em centavos?"
+    },
+    {
+      "id": "pending_nominal_cents",
+      "prompt": "Valor nominal das unidades pendentes em centavos?"
+    },
+    {
+      "id": "delivery_date",
+      "prompt": "Data contratual de entrega vigente, YYYY-MM-DD?"
+    },
+    {
+      "id": "court_deadline",
+      "prompt": "Vencimento processual? null se não determinável."
+    },
+    {
+      "id": "client_preference",
+      "prompt": "Preferência entre cumprimento e resolução?"
+    }
+  ],
+  "expected": [
+    {
+      "id": "contract_units",
+      "value": "120",
+      "sources": ["C01-D0004"],
+      "rationale": "Instrumento assinado."
+    },
+    {
+      "id": "accepted_units",
+      "value": "103",
+      "sources": ["C01-D0097"],
+      "rationale": "Auditoria prevalece sobre email."
+    },
+    {
+      "id": "pending_units",
+      "value": "17",
+      "sources": ["C01-D0004", "C01-D0097"],
+      "rationale": "Contratado menos aceito."
+    },
+    {
+      "id": "paid_cents",
+      "value": "15000000",
+      "sources": ["C01-D0033"],
+      "rationale": "Comprovante conciliado, sem somar contratos alheios."
+    },
+    {
+      "id": "pending_nominal_cents",
+      "value": "4250000",
+      "sources": ["C01-D0004", "C01-D0097"],
+      "rationale": "Quantidade pendente vezes preço; não equivale a indenização ou saldo exigível."
+    },
+    {
+      "id": "delivery_date",
+      "value": "2026-06-20",
+      "sources": ["C01-D0126"],
+      "rationale": "Aditivo substitui cronograma."
+    },
+    {
+      "id": "court_deadline",
+      "value": null,
+      "sources": [],
+      "rationale": "Nenhum processo identificado."
+    },
+    {
+      "id": "client_preference",
+      "value": "cumprimento",
+      "sources": ["C01-D0128"],
+      "rationale": "Instrução vigente."
+    }
+  ],
+  "deliverables": [
+    {
+      "id": "memorandum",
+      "title": "Memorando do dossiê",
+      "minWords": 300
+    },
+    {
+      "id": "evidence_map",
+      "title": "Mapa de evidências e contradições",
+      "minWords": 140
+    }
+  ],
+  "rubric": [
+    {
+      "id": "R1",
+      "criterion": "O mapa conecta as evidências do contrato correto e não transfere pagamentos ou entregas de outros contratos.",
+      "artifacts": ["evidence_map"],
+      "sources": ["C01-D0004", "C01-D0097", "C01-D0033", "C01-D0126", "C01-D0128"]
+    },
+    {
+      "id": "R2",
+      "criterion": "O memorando resolve o conflito entre relato de entrega e auditoria usando o aceite efetivo.",
+      "artifacts": ["memorandum"],
+      "sources": ["C01-D0097"]
+    },
+    {
+      "id": "R3",
+      "criterion": "O memorando demonstra o cálculo da quantidade pendente.",
+      "artifacts": ["memorandum"],
+      "sources": ["C01-D0004", "C01-D0097"]
+    },
+    {
+      "id": "R4",
+      "criterion": "O memorando reconcilia o pagamento documentado sem somar lançamentos de terceiros.",
+      "artifacts": ["memorandum"],
+      "sources": ["C01-D0033"]
+    },
+    {
+      "id": "R5",
+      "criterion": "O memorando distingue valor nominal das unidades pendentes de indenização ou saldo exigível.",
+      "artifacts": ["memorandum"],
+      "sources": ["C01-D0004", "C01-D0097"]
+    },
+    {
+      "id": "R6",
+      "criterion": "O memorando usa a data do aditivo vigente em vez do cronograma superado.",
+      "artifacts": ["memorandum"],
+      "sources": ["C01-D0126"]
+    },
+    {
+      "id": "R7",
+      "criterion": "O memorando mantém o prazo judicial indeterminado e não declara envio autorizado.",
+      "artifacts": ["memorandum"],
+      "sources": ["C01-D0128"]
+    },
+    {
+      "id": "R8",
+      "criterion": "O mapa apresenta cronologia e ressalvas com fontes identificáveis, sem transformar distratores em fatos.",
+      "artifacts": ["evidence_map"],
+      "sources": ["C01-D0004", "C01-D0097", "C01-D0033", "C01-D0126", "C01-D0128"]
+    }
+  ],
+  "documentsFile": "fixtures/C04.jsonl",
+  "documentCount": 128,
+  "documentCharacters": 579461,
+  "documentBytes": 599600,
+  "comparisonGroup": "H-220-paired-size-v1"
+}

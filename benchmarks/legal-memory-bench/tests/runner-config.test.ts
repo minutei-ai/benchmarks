@@ -1,8 +1,14 @@
 import { expect, test } from "bun:test";
 import { Schema } from "effect";
-import { AgentConfig } from "../src/contracts";
+import { AgentConfig } from "@minutei/benchmark/contracts";
 
-const config = { caseId: "sample", model: "sample", harness: "sample", command: ["bun", "adapter.ts"], output: "/tmp/result.json" };
+const config = {
+  caseId: "sample",
+  model: "sample",
+  harness: "sample",
+  command: ["bun", "adapter.ts"],
+  output: "/tmp/result.json",
+};
 
 test("runner accepts its default budget and a bounded custom timeout", () => {
   expect(Schema.is(AgentConfig)(config)).toBe(true);

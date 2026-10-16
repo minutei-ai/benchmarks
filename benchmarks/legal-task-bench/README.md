@@ -1,117 +1,77 @@
-# legal-task-bench
+# Legal Task Bench
 
-Tarefas jurídicas completas, com entregas, verificações factuais e rubricas de revisão.
+Trabalho jurídico com documentos, fatos estruturados e entregas revisáveis. **Revisão 0.2.0, oito casos sintéticos.** O harness usa suas ferramentas para ler o arquivo de documentos e produzir as entregas; o runner não resolve a tarefa nem chama diretamente um modelo.
 
-Benchmark independente do Minutei. **Versão 0.1.0: casos e avaliadores executáveis; integração Capi e execuções de agentes ainda pendentes.**
+| Caso | Trabalho                                              |
+| ---- | ----------------------------------------------------- |
+| T01  | Entrega parcial de equipamentos                       |
+| T02  | Defesa em cobrança com pagamentos omitidos            |
+| T03  | Cobrança duplicada de consumidor                      |
+| T04  | Revisão de contrato de tecnologia                     |
+| T05  | Providências após decisão judicial                    |
+| T06  | Proposta de acordo com limite de mandato              |
+| T07  | Marco de intimação ausente e providência preparatória |
+| T08  | Versões conflitantes e suspensão posterior de envio   |
 
-A unidade é uma entrega jurídica completa, acompanhada de documentos, objetivo do cliente, fatos verificáveis e rubrica. Consulta à legislação integra a tarefa; não existe um benchmark de legislação separado.
+## Executar
 
-| Caso | Trabalho |
-| --- | --- |
-| T01 | Entrega parcial de equipamentos |
-| T02 | Defesa em cobrança com pagamentos omitidos |
-| T03 | Cobrança duplicada de consumidor |
-| T04 | Revisão de contrato de tecnologia |
-| T05 | Providências após decisão judicial |
-| T06 | Proposta de acordo com limite de mandato |
+Instale na raiz com `bun install --frozen-lockfile`. Configuração do adapter:
 
-## Rodar
-
-Requer Bun 1.4.2. Todos os checks locais são offline e não chamam provedores.
+```json
+{
+  "caseId": "T01",
+  "model": "exact-provider-model-and-parameters",
+  "harness": "harness-sha-and-prompt-hash",
+  "command": ["bun", "/absolute/path/to/adapter.ts"],
+  "output": "/absolute/path/to/result.json",
+  "timeoutMs": 300000
+}
+```
 
 ```sh
-cd ../..
-bun install --frozen-lockfile
-cd benchmarks/legal-task-bench
-bun run check
-bun run validate
-bun test
-bun run export > dataset.jsonl
-bun run run:agent config.json
-bun run evaluate submission.json
+bun run --cwd benchmarks/legal-task-bench run:agent /absolute/path/to/config.json
 ```
 
-Configuração do runner:
+O adapter recebe uma mensagem JSON por stdin com instrução, perguntas, entregas e caminho de `documentsFile`. Gabaritos e rubrica privada não entram no payload. Logs vão para stderr; a resposta é um JSON:
 
 ```json
 {
   "caseId": "T01",
-  "model": "provider/exact-model-snapshot-and-parameters",
-  "harness": "harness-git-sha-and-prompt-config-hash",
-  "command": ["bun", "/absolute/path/to/adapter.ts"],
-  "output": "/absolute/path/to/results/run.json"
+  "answers": [
+    {
+      "id": "question-id",
+      "value": "canonical-value-or-null",
+      "citations": [{ "documentId": "source-id", "quote": "Literal supporting excerpt" }]
+    }
+  ],
+  "artifacts": [{ "id": "deliverable-id", "body": "Complete work product" }]
 }
 ```
 
-O adapter recebe um JSON em stdin e deve responder com um JSON em stdout; logs vão para stderr. Ele chama o harness real, com suas ferramentas e memória. Não há chamada direta a LLM ou adapter específico do Capi incluído. O runner fornece dados e recolhe entregas; o adapter é responsável por honrar o modelo declarado e isolar serviços externos. O mesmo modelo, parâmetros, orçamento e versão do dataset devem ser usados na comparação entre harnesses.
+Use os IDs, representações e entregas especificados no input. Valores monetários são centavos e datas são ISO quando a pergunta exigir. Desconhecido usa JSON `null` e citações vazias. Cada resposta conhecida precisa das fontes requeridas e de citações literais de pelo menos 12 caracteres. Fontes de outro fato, IDs duplicados, omissões e entregas ausentes falham. O adapter não pode incluir sua própria revisão.
 
-Há um limite de cinco minutos por processo do adapter. Falhas de processo, protocolo ou tempo encerram com código diferente de zero e devem entrar no denominador do experimento. A versão inicial não persiste relatório estruturado quando o adapter falha antes de responder: preserve stderr e o código de saída. O runner limpa seu diretório temporário mesmo em falha. Ele não é um sandbox contra um adapter hostil: para publicação de resultados, isole-o em container sem acesso a `cases/`, avaliadores ou gabaritos, e registre a política de rede e ferramentas.
+Timeout padrão de cinco minutos, ajustável entre 1 segundo e 1 hora por subprocesso. O resultado e `<resultado>.stderr.log` ficam fora do diretório temporário; falhas de processo, JSON, timeout e saída acima de 2 MiB geram `status: execution_failed`, sem pontuação factual inventada. A limpeza remove o diretório de documentos ao finalizar.
 
-O resultado da execução contém `submission` e `report`. Para revisão ou avaliação posterior, salve o objeto `submission` em um arquivo e passe esse arquivo a `bun run evaluate`. Tempo observado é registrado. Tokens, custo, chamadas de ferramentas e uso de memória não são inventados nem preenchidos com zero; a integração deve fornecê-los a partir do trace real.
+## Avaliação
 
-## Dataset e provenance
+Checks automáticos conferem fatos, citações e presença das entregas, incluindo tamanho mínimo. Aprovação da tarefa exige revisão independente com nota 2 em todos os critérios. Cada critério delimita artefatos e fontes; a revisão é vinculada a `submissionDigest` e `caseDigest`.
 
-`benchmark.json` e `cases/` são a fonte versionada. `bun run export` produz JSONL no formato nativo dos itens de dataset PostHog: `client_item_id`, `input`, `expected_output`, `metadata`. Os IDs são estáveis por versão, e `fixture_sha256` identifica o conteúdo carregado. PostHog mantém a cópia de avaliação; a publicação foi conferida por leitura da API. Veja [o registro](docs/posthog.md).
-
-Nunca envie `expected_output`, `expected`, `rubric` privada, respostas de controle ou resultados de revisão ao agente. O runner entrega apenas o input público. Não edite o dataset remoto e o repositório independentemente: publique nova versão após revisão da fonte.
-
-## Limitações e contribuição
-
-Esta é uma suíte inicial pública, com casos sintéticos escritos para desenvolvimento e ainda sem revisão jurídica independente. Não demonstra aptidão profissional nem representa clientes reais. Não há resultados de agentes publicados. Testes do avaliador usam respostas de controle; não são resultados de LLMs.
-
-As primeiras execuções devem ser baselines de desenvolvimento. Repita cada caso com estado novo, inclua falhas e publique resultados por caso, não apenas uma média. A amostra é pequena e pública: mantenha casos novos/privados para avaliar generalização. Contribuições precisam trazer cenário, fontes, resultado verificável, falhas esperadas, limites e revisão; mudar gabaritos requer nova versão do benchmark.
-
-## Avaliação de entregas
-
-O adapter retorna:
-
-```json
-{
-  "caseId": "T01",
-  "answers": [{"id": "question_id", "value": "canonical answer or null", "citations": [{"documentId": "source-id", "quote": "literal supporting excerpt"}]}],
-  "artifacts": [{"id": "deliverable_id", "body": "Full work product"}]
-}
+```sh
+bun run --cwd benchmarks/legal-task-bench evaluate /absolute/path/to/submission.json
 ```
 
-Cada pergunta especifica a representação: valores monetários em centavos, datas ISO e escolhas textuais. Resposta desconhecida usa JSON `null`, sem citações. Cada resposta conhecida precisa de trechos literais de pelo menos 12 caracteres e de todas as fontes exigidas para o cálculo ou conclusão. IDs duplicados, omissões, valores errados e citações inexistentes falham. Todas as entregas exigidas devem existir e atingir o mínimo de palavras indicado.
+Veja [como registrar a revisão](../../docs/review.md) e [a metodologia](../../docs/methodology.md). Sem revisão, uma entrega com todos os checks automáticos aprovados permanece `awaiting_review` e `passed: false`.
 
-Esses checks só validam fatos estruturados, citações literais e presença das entregas. Não provam que a citação sustenta toda a argumentação nem que o texto é bom. Sem revisão, o resultado é `awaiting_review` e `passed: false` mesmo quando todos os checks automáticos passam.
+## Fonte, versões e integração
 
-Um revisor independente avalia cada critério em `cases/<id>.json`: 0 = não atendido, 1 = parcialmente atendido, 2 = atendido. Critérios críticos exigem 2; demais exigem pelo menos 1; total mínimo de 80%. Identifique o revisor, justifique notas e aponte trechos das entregas. A revisão fica vinculada ao SHA-256 de respostas e artefatos por `submissionDigest`, impresso pelo avaliador. Alterar a submissão invalida a revisão.
+`benchmark.json` e `cases/` são a fonte. Os exports 0.2.0 têm novos IDs e hashes; [o registro PostHog](docs/posthog.md) descreve uma publicação histórica 0.1.x. Não houve espelhamento remoto de 0.2.0 ou nova execução de agentes nesta revisão.
 
-Acrescente à submissão:
+As referências legislativas dos casos originais são notas autorais sobre [Código Civil](https://www.planalto.gov.br/ccivil_03/leis/2002/l10406compilada.htm), [CDC](https://www.planalto.gov.br/ccivil_03/leis/l8078compilado.htm) e [CPC](https://www.planalto.gov.br/ccivil_03/_ato2015-2018/2015/lei/l13105.htm), registradas em 27/09/2026. Não são transcrições integrais ou revisão jurídica especializada. A suite não comprova aptidão profissional; pesquisa externa muda as condições do experimento e precisa ser registrada.
 
-```json
-{
-  "review": {
-    "reviewer": "reviewer-identity-and-role",
-    "submissionDigest": "digest-produced-by-evaluate",
-    "criteria": [{"id": "R1", "score": 2, "reason": "Specific assessment", "evidence": [{"artifactId": "deliverable_id", "quote": "Literal work-product excerpt"}]}]
-  }
-}
-```
-
-Forneça todos os critérios. A CLI valida completude, referência dos trechos e vínculo ao conteúdo. Ela não autentica o revisor ou comprova sua qualificação; a organização do experimento deve garantir independência e competência. `passed_with_recorded_review` significa aprovação com revisão registrada, não certificação jurídica automática. O runner rejeita revisões enviadas pelo próprio adapter.
-
-## Fontes jurídicas
-
-As referências legislativas nos casos são notas de trabalho autorais, não transcrições integrais. Fontes oficiais consultadas em 27/09/2026: [Código Civil](https://www.planalto.gov.br/ccivil_03/leis/2002/l10406compilada.htm), [CDC](https://www.planalto.gov.br/ccivil_03/leis/l8078compilado.htm) e [CPC](https://www.planalto.gov.br/ccivil_03/_ato2015-2018/2015/lei/l13105.htm). Não há jurisprudência fabricada. Se o experimento permitir pesquisa externa, registre data, fontes e ferramentas, pois isso muda as condições de comparação.
-
-Referência metodológica: [Harvey LAB](https://github.com/harveyai/harvey-labs), por avaliar tarefas jurídicas com entregas e rubricas. Os casos deste repositório foram escritos para esta suíte e não copiados do LAB.
-
-## Minutei local
-
-No checkout do Minutei com o adapter local, mantenha `bun run bench:serve` em outro terminal e execute:
+No checkout do Minutei com `bench:serve` ativo:
 
 ```sh
 bun run bench:run /caminho/benchmarks/benchmarks/legal-task-bench T01 /tmp/T01.json
 ```
 
-O adapter usa login de desenvolvimento, um escritório isolado, documentos e notas reais, ferramentas e streaming do Capi. A inferência continua usando o provedor configurado do Minutei. Em memória, cada sessão usa uma conversa nova, sem reenvio do histórico. Consulte `docs/legal-benchmarks-local.md` no Minutei para configuração e limites.
-
-`AgentConfig.timeoutMs` define o limite por subprocesso, entre 1.000 e 3.600.000 ms; o padrão é 300.000 ms. O Minutei usa 1.800.000 ms para incluir uploads e inferência. Uma saída não zero preserva o diagnóstico do adapter em stderr.
-
-
-### Revisão 0.1.1
-
-T01 aceita o termo bilateral D04 como evidência direta das seis unidades faltantes; D01 continua permitido como apoio adicional. A rubrica crítica R3 exige fundamentação das consequências e consistência entre notificação e parecer. Isso continua dependendo de revisão independente: o avaliador determinístico não detecta sozinho argumentação jurídica sem suporte. Resultados 0.1.0 e 0.1.1 devem manter sua versão na comparação. O dataset PostHog deve ser publicado novamente após incorporar esta revisão.
+O protocolo de respostas continua compatível com o adapter local. Isso não constitui uma nova validação com Capi, storage de produção ou provedor real.

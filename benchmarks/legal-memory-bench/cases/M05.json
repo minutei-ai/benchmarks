@@ -50,17 +50,13 @@
         {
           "id": "may_send",
           "value": "não",
-          "sources": [
-            "S2-D1"
-          ],
+          "sources": ["S2-D1"],
           "rationale": "Revisão não restaura autorização revogada."
         },
         {
           "id": "allowed_action",
           "value": "preparar minuta interna",
-          "sources": [
-            "S2-D1"
-          ],
+          "sources": ["S2-D1"],
           "rationale": "Mandato mais recente."
         }
       ]

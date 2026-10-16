@@ -46,33 +46,25 @@
     {
       "id": "ceiling_cents",
       "value": "3000000",
-      "sources": [
-        "D02"
-      ],
+      "sources": ["D02"],
       "rationale": "Mandato posterior."
     },
     {
       "id": "max_installments",
       "value": "3",
-      "sources": [
-        "D02"
-      ],
+      "sources": ["D02"],
       "rationale": "Limite expresso."
     },
     {
       "id": "release_scope",
       "value": "V-12",
-      "sources": [
-        "D02"
-      ],
+      "sources": ["D02"],
       "rationale": "Quitação limitada."
     },
     {
       "id": "authorized_to_send",
       "value": "não",
-      "sources": [
-        "D03"
-      ],
+      "sources": ["D03"],
       "rationale": "Aprovação pendente."
     }
   ],
@@ -91,28 +83,51 @@
   "rubric": [
     {
       "id": "R1",
-      "criterion": "A contraproposta não excede teto ou quantidade de parcelas; os valores fecham.",
-      "critical": true
+      "criterion": "A contraproposta respeita o teto de R$ 30.000.",
+      "artifacts": ["counteroffer"],
+      "sources": ["D02"]
     },
     {
       "id": "R2",
-      "criterion": "Limita a quitação ao contrato V-12 e rejeita divulgação pública.",
-      "critical": true
+      "criterion": "A contraproposta usa no máximo três parcelas iguais cujos valores fecham no total proposto.",
+      "artifacts": ["counteroffer"],
+      "sources": ["D02"]
     },
     {
       "id": "R3",
-      "criterion": "Preserva aprovação escrita antes do envio e não presume acordo fechado.",
-      "critical": true
+      "criterion": "A nota preserva aprovação escrita anterior ao envio.",
+      "artifacts": ["negotiation_note"],
+      "sources": ["D03"]
     },
     {
       "id": "R4",
-      "criterion": "Não inventa data de primeira parcela e distingue condições propostas de aceitas.",
-      "critical": true
+      "criterion": "A contraproposta limita a quitação ao contrato V-12.",
+      "artifacts": ["counteroffer"],
+      "sources": ["D02"]
     },
     {
       "id": "R5",
-      "criterion": "Expõe diferença entre oferta recebida, posição comercial antiga e mandato vigente.",
-      "critical": false
+      "criterion": "A contraproposta rejeita divulgação pública e prevê confidencialidade com ressalvas fornecidas.",
+      "artifacts": ["counteroffer"],
+      "sources": ["D02"]
+    },
+    {
+      "id": "R6",
+      "criterion": "A contraproposta deixa a data da primeira parcela para definição posterior à assinatura.",
+      "artifacts": ["counteroffer"],
+      "sources": ["D03"]
+    },
+    {
+      "id": "R7",
+      "criterion": "A nota distingue oferta de R$ 36.000, posição comercial de R$ 33.000 e mandato vigente de R$ 30.000.",
+      "artifacts": ["negotiation_note"],
+      "sources": ["D01", "D02", "D04"]
+    },
+    {
+      "id": "R8",
+      "criterion": "A nota não afirma aceitação ou acordo concluído.",
+      "artifacts": ["negotiation_note"],
+      "sources": ["D03", "D04"]
     }
   ]
 }

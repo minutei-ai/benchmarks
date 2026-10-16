@@ -50,18 +50,13 @@
         {
           "id": "forgery_proven",
           "value": "não",
-          "sources": [
-            "S1-D1",
-            "S2-D1"
-          ],
+          "sources": ["S1-D1", "S2-D1"],
           "rationale": "A diligência não confirma a hipótese."
         },
         {
           "id": "report_status",
           "value": "não produzido",
-          "sources": [
-            "S2-D1"
-          ],
+          "sources": ["S2-D1"],
           "rationale": "Solicitação não equivale a entrega."
         }
       ]

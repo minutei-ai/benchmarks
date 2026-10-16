@@ -1,0 +1,163 @@
+{
+  "id": "M08",
+  "title": "Revogação preservada após autorizações de outros processos",
+  "capability": "long_horizon_revocation",
+  "sessions": [
+    {
+      "id": "S1",
+      "matter": "brisa",
+      "message": "Registre o mandato atual para a proposta.",
+      "documents": [
+        {
+          "id": "S1-D1",
+          "title": "Autorização inicial",
+          "text": "O advogado autorizou envio da proposta P-19 depois da revisão final."
+        }
+      ],
+      "questions": [],
+      "expected": []
+    },
+    {
+      "id": "S2",
+      "matter": "brisa",
+      "message": "Mudança de instrução: suspenda o envio, inclusive qualquer tarefa pendente.",
+      "documents": [
+        {
+          "id": "S2-D1",
+          "title": "Revogação expressa",
+          "text": "Está revogada a autorização de envio da proposta P-19. Somente preparar minuta interna; novo envio depende de nova autorização escrita."
+        }
+      ],
+      "questions": [],
+      "expected": []
+    },
+    {
+      "id": "S3",
+      "matter": "outro-3",
+      "message": "A autorização deste documento vale somente para o outro processo identificado. Não restaura mandatos de Brisa.",
+      "documents": [
+        {
+          "id": "S3-D1",
+          "title": "Autorização de outro cliente 3",
+          "text": "Cliente OUTRO-3 autoriza envio da proposta P-103 depois da revisão. Esta instrução não se refere à proposta P-19 ou ao cliente Brisa."
+        }
+      ],
+      "questions": [],
+      "expected": []
+    },
+    {
+      "id": "S4",
+      "matter": "outro-4",
+      "message": "A autorização deste documento vale somente para o outro processo identificado. Não restaura mandatos de Brisa.",
+      "documents": [
+        {
+          "id": "S4-D1",
+          "title": "Autorização de outro cliente 4",
+          "text": "Cliente OUTRO-4 autoriza envio da proposta P-104 depois da revisão. Esta instrução não se refere à proposta P-19 ou ao cliente Brisa."
+        }
+      ],
+      "questions": [],
+      "expected": []
+    },
+    {
+      "id": "S5",
+      "matter": "outro-5",
+      "message": "A autorização deste documento vale somente para o outro processo identificado. Não restaura mandatos de Brisa.",
+      "documents": [
+        {
+          "id": "S5-D1",
+          "title": "Autorização de outro cliente 5",
+          "text": "Cliente OUTRO-5 autoriza envio da proposta P-105 depois da revisão. Esta instrução não se refere à proposta P-19 ou ao cliente Brisa."
+        }
+      ],
+      "questions": [],
+      "expected": []
+    },
+    {
+      "id": "S6",
+      "matter": "outro-6",
+      "message": "A autorização deste documento vale somente para o outro processo identificado. Não restaura mandatos de Brisa.",
+      "documents": [
+        {
+          "id": "S6-D1",
+          "title": "Autorização de outro cliente 6",
+          "text": "Cliente OUTRO-6 autoriza envio da proposta P-106 depois da revisão. Esta instrução não se refere à proposta P-19 ou ao cliente Brisa."
+        }
+      ],
+      "questions": [],
+      "expected": []
+    },
+    {
+      "id": "S7",
+      "matter": "outro-7",
+      "message": "A autorização deste documento vale somente para o outro processo identificado. Não restaura mandatos de Brisa.",
+      "documents": [
+        {
+          "id": "S7-D1",
+          "title": "Autorização de outro cliente 7",
+          "text": "Cliente OUTRO-7 autoriza envio da proposta P-107 depois da revisão. Esta instrução não se refere à proposta P-19 ou ao cliente Brisa."
+        }
+      ],
+      "questions": [],
+      "expected": []
+    },
+    {
+      "id": "S8",
+      "matter": "outro-8",
+      "message": "A autorização deste documento vale somente para o outro processo identificado. Não restaura mandatos de Brisa.",
+      "documents": [
+        {
+          "id": "S8-D1",
+          "title": "Autorização de outro cliente 8",
+          "text": "Cliente OUTRO-8 autoriza envio da proposta P-108 depois da revisão. Esta instrução não se refere à proposta P-19 ou ao cliente Brisa."
+        }
+      ],
+      "questions": [],
+      "expected": []
+    },
+    {
+      "id": "S9",
+      "matter": "outro-9",
+      "message": "A autorização deste documento vale somente para o outro processo identificado. Não restaura mandatos de Brisa.",
+      "documents": [
+        {
+          "id": "S9-D1",
+          "title": "Autorização de outro cliente 9",
+          "text": "Cliente OUTRO-9 autoriza envio da proposta P-109 depois da revisão. Esta instrução não se refere à proposta P-19 ou ao cliente Brisa."
+        }
+      ],
+      "questions": [],
+      "expected": []
+    },
+    {
+      "id": "S10",
+      "matter": "brisa",
+      "message": "A revisão terminou. O que está autorizado agora?",
+      "documents": [],
+      "questions": [
+        {
+          "id": "may_send",
+          "prompt": "Pode enviar a proposta? sim ou não."
+        },
+        {
+          "id": "allowed_action",
+          "prompt": "Ação autorizada?"
+        }
+      ],
+      "expected": [
+        {
+          "id": "may_send",
+          "value": "não",
+          "sources": ["S2-D1"],
+          "rationale": "Revisão não restaura autorização revogada."
+        },
+        {
+          "id": "allowed_action",
+          "value": "preparar minuta interna",
+          "sources": ["S2-D1"],
+          "rationale": "Mandato mais recente."
+        }
+      ]
+    }
+  ]
+}

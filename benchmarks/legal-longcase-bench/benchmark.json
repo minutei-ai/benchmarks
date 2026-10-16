@@ -1,14 +1,10 @@
 {
   "name": "legal-longcase-bench",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Dossiês jurídicos extensos com evidências dispersas, contradições e documentos de outros contratos.",
   "language": "pt-BR",
   "synthetic": true,
   "status": "initial_public_suite",
   "legalReview": "pending",
-  "cases": [
-    "C01",
-    "C02",
-    "C03"
-  ]
+  "cases": ["C01", "C02", "C03", "C04", "C05", "C06"]
 }

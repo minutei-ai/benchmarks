@@ -1,5 +1,7 @@
 # Dataset PostHog
 
+Este arquivo registra a publicação histórica de 0.1.x. A fonte atual está em [minutei-ai/benchmarks](https://github.com/minutei-ai/benchmarks/tree/main/benchmarks/oab-bench). O export 0.2.0 não foi publicado no PostHog. Os repositórios separados foram removidos; commits históricos continuam acessíveis neste repositório com os caminhos originais.
+
 Dataset `oab-bench`, projeto Minutei `413137`, criado e conferido por leitura da API em 27/09/2026.
 
 - Dataset ID: `01a0e574-4e3c-79be-b0af-f1a747044954`.
@@ -8,11 +10,11 @@ Dataset `oab-bench`, projeto Minutei `413137`, criado e conferido por leitura da
 - Região: `https://us.posthog.com`.
 - API: `/api/projects/413137/datasets/01a0e574-4e3c-79be-b0af-f1a747044954/`.
 
-| Caso | ID estável do cliente | Item PostHog |
-| --- | --- | --- |
-| Evidências | `oab-bench-v0.1.0-evidence` | `01a0e574-4f6a-76e1-9f80-683dfc7d155d` |
-| Injeção | `oab-bench-v0.1.0-injection` | `01a0e574-5075-7573-8091-4e0a4e8aeb52` |
-| Recuperação | `oab-bench-v0.1.0-retry` | `01a0e574-5161-7167-87e8-7620164adc07` |
+| Caso        | ID estável do cliente        | Item PostHog                           |
+| ----------- | ---------------------------- | -------------------------------------- |
+| Evidências  | `oab-bench-v0.1.0-evidence`  | `01a0e574-4f6a-76e1-9f80-683dfc7d155d` |
+| Injeção     | `oab-bench-v0.1.0-injection` | `01a0e574-5075-7573-8091-4e0a4e8aeb52` |
+| Recuperação | `oab-bench-v0.1.0-retry`     | `01a0e574-5161-7167-87e8-7620164adc07` |
 
 Todos estão na versão 1. Inputs, critérios esperados e metadados foram comparados estruturalmente com `bun src/export.ts`; as três entradas coincidem.
 

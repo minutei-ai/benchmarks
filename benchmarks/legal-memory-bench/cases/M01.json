@@ -50,17 +50,13 @@
         {
           "id": "paid_cents",
           "value": "4800000",
-          "sources": [
-            "S2-D1"
-          ],
+          "sources": ["S2-D1"],
           "rationale": "A correção documental substitui o relato."
         },
         {
           "id": "basis",
           "value": "prova",
-          "sources": [
-            "S2-D1"
-          ],
+          "sources": ["S2-D1"],
           "rationale": "Comprovante validado."
         }
       ]

@@ -56,33 +56,25 @@
     {
       "id": "pending_units",
       "value": "6",
-      "sources": [
-        "D04"
-      ],
+      "sources": ["D04"],
       "rationale": "O termo bilateral declara expressamente que faltam seis unidades; contrato e termo também sustentam o cálculo."
     },
     {
       "id": "paid_cents",
       "value": "4800000",
-      "sources": [
-        "D02"
-      ],
+      "sources": ["D02"],
       "rationale": "Entrada liquidada."
     },
     {
       "id": "client_preference",
       "value": "cumprimento",
-      "sources": [
-        "D05"
-      ],
+      "sources": ["D05"],
       "rationale": "A preferência expressa é receber as unidades."
     },
     {
       "id": "authorized_to_send",
       "value": "não",
-      "sources": [
-        "D05"
-      ],
+      "sources": ["D05"],
       "rationale": "Somente preparação autorizada."
     }
   ],
@@ -101,28 +93,45 @@
   "rubric": [
     {
       "id": "R1",
-      "criterion": "Compatibiliza a entrega parcial com o termo bilateral e enfrenta o email contraditório.",
-      "critical": true
+      "criterion": "O parecer usa o termo bilateral para estabelecer a entrega parcial e enfrenta a divergência do email.",
+      "artifacts": ["memo"],
+      "sources": ["D03", "D04"]
     },
     {
       "id": "R2",
-      "criterion": "A notificação exige as seis unidades e vincula o prazo ao recebimento, sem inventar data final.",
-      "critical": true
+      "criterion": "A minuta exige as seis unidades faltantes com prazo vinculado ao recebimento, sem inventar data final.",
+      "artifacts": ["notice"],
+      "sources": ["D04", "D05"]
     },
     {
       "id": "R3",
-      "criterion": "Distingue cumprimento, resolução e eventual indenização sem prometer resultado ou inventar prejuízo; fundamenta as consequências propostas e mantém consistência entre notificação e parecer, sem introduzir restituição em dobro sem suporte demonstrado.",
-      "critical": true
+      "criterion": "O parecer fundamenta as consequências propostas nas referências fornecidas, sem propor restituição em dobro sem suporte.",
+      "artifacts": ["memo"],
+      "sources": ["L01"]
     },
     {
       "id": "R4",
-      "criterion": "Trata a condição de exigibilidade do saldo à luz do contrato e das referências fornecidas.",
-      "critical": false
+      "criterion": "O parecer analisa a exigibilidade do saldo conforme a condição contratual.",
+      "artifacts": ["memo"],
+      "sources": ["D01"]
     },
     {
       "id": "R5",
-      "criterion": "Mantém qualificações ausentes em aberto, separa minuta e parecer e não afirma ter enviado.",
-      "critical": true
+      "criterion": "A minuta mantém qualificações ausentes em aberto e não declara envio realizado.",
+      "artifacts": ["notice"],
+      "sources": ["D05"]
+    },
+    {
+      "id": "R6",
+      "criterion": "O parecer distingue cumprimento, resolução e eventual indenização, sem tratar prejuízo não comprovado como fato.",
+      "artifacts": ["memo"],
+      "sources": ["D05", "L01"]
+    },
+    {
+      "id": "R7",
+      "criterion": "As providências da notificação são consistentes com as alternativas e ressalvas do parecer.",
+      "artifacts": ["notice", "memo"],
+      "sources": ["D05", "L01"]
     }
   ]
 }

@@ -1,0 +1,359 @@
+{
+  "id": "M07",
+  "title": "Correção após 24 sessões com clientes homônimos",
+  "capability": "long_horizon_update_and_isolation",
+  "sessions": [
+    {
+      "id": "S1",
+      "matter": "aurora-principal",
+      "message": "Registre o relato inicial do processo principal; o valor ainda não foi conferido.",
+      "documents": [
+        {
+          "id": "S1-D1",
+          "title": "Relato sem prova",
+          "text": "Aurora no processo PRINCIPAL-7 relata entrada de R$ 45.000,00, ainda sem comprovante."
+        }
+      ],
+      "questions": [],
+      "expected": []
+    },
+    {
+      "id": "S2",
+      "matter": "operacional-2",
+      "message": "Registre este assunto apenas no seu próprio processo; outros clientes com o mesmo nome não devem contaminar a memória.",
+      "documents": [
+        {
+          "id": "S2-D1",
+          "title": "Registro de outro processo 2",
+          "text": "O cliente Aurora do processo OUTRO-2 informou um adiantamento de R$ 1400,00. Este registro pertence exclusivamente ao processo OUTRO-2."
+        }
+      ],
+      "questions": [],
+      "expected": []
+    },
+    {
+      "id": "S3",
+      "matter": "operacional-3",
+      "message": "Registre este assunto apenas no seu próprio processo; outros clientes com o mesmo nome não devem contaminar a memória.",
+      "documents": [
+        {
+          "id": "S3-D1",
+          "title": "Registro de outro processo 3",
+          "text": "O cliente Aurora do processo OUTRO-3 informou um adiantamento de R$ 2100,00. Este registro pertence exclusivamente ao processo OUTRO-3."
+        }
+      ],
+      "questions": [],
+      "expected": []
+    },
+    {
+      "id": "S4",
+      "matter": "operacional-4",
+      "message": "Registre este assunto apenas no seu próprio processo; outros clientes com o mesmo nome não devem contaminar a memória.",
+      "documents": [
+        {
+          "id": "S4-D1",
+          "title": "Registro de outro processo 4",
+          "text": "O cliente Aurora do processo OUTRO-4 informou um adiantamento de R$ 2800,00. Este registro pertence exclusivamente ao processo OUTRO-4."
+        }
+      ],
+      "questions": [],
+      "expected": []
+    },
+    {
+      "id": "S5",
+      "matter": "operacional-5",
+      "message": "Registre este assunto apenas no seu próprio processo; outros clientes com o mesmo nome não devem contaminar a memória.",
+      "documents": [
+        {
+          "id": "S5-D1",
+          "title": "Registro de outro processo 5",
+          "text": "O cliente Aurora do processo OUTRO-5 informou um adiantamento de R$ 3500,00. Este registro pertence exclusivamente ao processo OUTRO-5."
+        }
+      ],
+      "questions": [],
+      "expected": []
+    },
+    {
+      "id": "S6",
+      "matter": "operacional-6",
+      "message": "Registre este assunto apenas no seu próprio processo; outros clientes com o mesmo nome não devem contaminar a memória.",
+      "documents": [
+        {
+          "id": "S6-D1",
+          "title": "Registro de outro processo 6",
+          "text": "O cliente Aurora do processo OUTRO-6 informou um adiantamento de R$ 4200,00. Este registro pertence exclusivamente ao processo OUTRO-6."
+        }
+      ],
+      "questions": [],
+      "expected": []
+    },
+    {
+      "id": "S7",
+      "matter": "operacional-7",
+      "message": "Registre este assunto apenas no seu próprio processo; outros clientes com o mesmo nome não devem contaminar a memória.",
+      "documents": [
+        {
+          "id": "S7-D1",
+          "title": "Registro de outro processo 7",
+          "text": "O cliente Aurora do processo OUTRO-7 informou um adiantamento de R$ 4900,00. Este registro pertence exclusivamente ao processo OUTRO-7."
+        }
+      ],
+      "questions": [],
+      "expected": []
+    },
+    {
+      "id": "S8",
+      "matter": "operacional-8",
+      "message": "Registre este assunto apenas no seu próprio processo; outros clientes com o mesmo nome não devem contaminar a memória.",
+      "documents": [
+        {
+          "id": "S8-D1",
+          "title": "Registro de outro processo 8",
+          "text": "O cliente Aurora do processo OUTRO-8 informou um adiantamento de R$ 5600,00. Este registro pertence exclusivamente ao processo OUTRO-8."
+        }
+      ],
+      "questions": [],
+      "expected": []
+    },
+    {
+      "id": "S9",
+      "matter": "operacional-9",
+      "message": "Registre este assunto apenas no seu próprio processo; outros clientes com o mesmo nome não devem contaminar a memória.",
+      "documents": [
+        {
+          "id": "S9-D1",
+          "title": "Registro de outro processo 9",
+          "text": "O cliente Aurora do processo OUTRO-9 informou um adiantamento de R$ 6300,00. Este registro pertence exclusivamente ao processo OUTRO-9."
+        }
+      ],
+      "questions": [],
+      "expected": []
+    },
+    {
+      "id": "S10",
+      "matter": "operacional-10",
+      "message": "Registre este assunto apenas no seu próprio processo; outros clientes com o mesmo nome não devem contaminar a memória.",
+      "documents": [
+        {
+          "id": "S10-D1",
+          "title": "Registro de outro processo 10",
+          "text": "O cliente Aurora do processo OUTRO-10 informou um adiantamento de R$ 7000,00. Este registro pertence exclusivamente ao processo OUTRO-10."
+        }
+      ],
+      "questions": [],
+      "expected": []
+    },
+    {
+      "id": "S11",
+      "matter": "operacional-11",
+      "message": "Registre este assunto apenas no seu próprio processo; outros clientes com o mesmo nome não devem contaminar a memória.",
+      "documents": [
+        {
+          "id": "S11-D1",
+          "title": "Registro de outro processo 11",
+          "text": "O cliente Aurora do processo OUTRO-11 informou um adiantamento de R$ 7700,00. Este registro pertence exclusivamente ao processo OUTRO-11."
+        }
+      ],
+      "questions": [],
+      "expected": []
+    },
+    {
+      "id": "S12",
+      "matter": "operacional-12",
+      "message": "Registre este assunto apenas no seu próprio processo; outros clientes com o mesmo nome não devem contaminar a memória.",
+      "documents": [
+        {
+          "id": "S12-D1",
+          "title": "Registro de outro processo 12",
+          "text": "O cliente Aurora do processo OUTRO-12 informou um adiantamento de R$ 8400,00. Este registro pertence exclusivamente ao processo OUTRO-12."
+        }
+      ],
+      "questions": [],
+      "expected": []
+    },
+    {
+      "id": "S13",
+      "matter": "operacional-13",
+      "message": "Registre este assunto apenas no seu próprio processo; outros clientes com o mesmo nome não devem contaminar a memória.",
+      "documents": [
+        {
+          "id": "S13-D1",
+          "title": "Registro de outro processo 13",
+          "text": "O cliente Aurora do processo OUTRO-13 informou um adiantamento de R$ 9100,00. Este registro pertence exclusivamente ao processo OUTRO-13."
+        }
+      ],
+      "questions": [],
+      "expected": []
+    },
+    {
+      "id": "S14",
+      "matter": "operacional-14",
+      "message": "Registre este assunto apenas no seu próprio processo; outros clientes com o mesmo nome não devem contaminar a memória.",
+      "documents": [
+        {
+          "id": "S14-D1",
+          "title": "Registro de outro processo 14",
+          "text": "O cliente Aurora do processo OUTRO-14 informou um adiantamento de R$ 9800,00. Este registro pertence exclusivamente ao processo OUTRO-14."
+        }
+      ],
+      "questions": [],
+      "expected": []
+    },
+    {
+      "id": "S15",
+      "matter": "operacional-15",
+      "message": "Registre este assunto apenas no seu próprio processo; outros clientes com o mesmo nome não devem contaminar a memória.",
+      "documents": [
+        {
+          "id": "S15-D1",
+          "title": "Registro de outro processo 15",
+          "text": "O cliente Aurora do processo OUTRO-15 informou um adiantamento de R$ 10500,00. Este registro pertence exclusivamente ao processo OUTRO-15."
+        }
+      ],
+      "questions": [],
+      "expected": []
+    },
+    {
+      "id": "S16",
+      "matter": "operacional-16",
+      "message": "Registre este assunto apenas no seu próprio processo; outros clientes com o mesmo nome não devem contaminar a memória.",
+      "documents": [
+        {
+          "id": "S16-D1",
+          "title": "Registro de outro processo 16",
+          "text": "O cliente Aurora do processo OUTRO-16 informou um adiantamento de R$ 11200,00. Este registro pertence exclusivamente ao processo OUTRO-16."
+        }
+      ],
+      "questions": [],
+      "expected": []
+    },
+    {
+      "id": "S17",
+      "matter": "aurora-principal",
+      "message": "Corrija o valor do processo PRINCIPAL-7 pela documentação recebida; preserve fonte e natureza da informação.",
+      "documents": [
+        {
+          "id": "S17-D1",
+          "title": "Comprovante conciliado",
+          "text": "No processo PRINCIPAL-7, o pagamento conciliado foi de R$ 48.000,00. O relato de R$ 45.000,00 estava errado. Esta prova não pertence aos processos OUTRO."
+        }
+      ],
+      "questions": [],
+      "expected": []
+    },
+    {
+      "id": "S18",
+      "matter": "operacional-18",
+      "message": "Registre este assunto apenas no seu próprio processo; outros clientes com o mesmo nome não devem contaminar a memória.",
+      "documents": [
+        {
+          "id": "S18-D1",
+          "title": "Registro de outro processo 18",
+          "text": "O cliente Aurora do processo OUTRO-18 informou um adiantamento de R$ 12600,00. Este registro pertence exclusivamente ao processo OUTRO-18."
+        }
+      ],
+      "questions": [],
+      "expected": []
+    },
+    {
+      "id": "S19",
+      "matter": "operacional-19",
+      "message": "Registre este assunto apenas no seu próprio processo; outros clientes com o mesmo nome não devem contaminar a memória.",
+      "documents": [
+        {
+          "id": "S19-D1",
+          "title": "Registro de outro processo 19",
+          "text": "O cliente Aurora do processo OUTRO-19 informou um adiantamento de R$ 13300,00. Este registro pertence exclusivamente ao processo OUTRO-19."
+        }
+      ],
+      "questions": [],
+      "expected": []
+    },
+    {
+      "id": "S20",
+      "matter": "operacional-20",
+      "message": "Registre este assunto apenas no seu próprio processo; outros clientes com o mesmo nome não devem contaminar a memória.",
+      "documents": [
+        {
+          "id": "S20-D1",
+          "title": "Registro de outro processo 20",
+          "text": "O cliente Aurora do processo OUTRO-20 informou um adiantamento de R$ 14000,00. Este registro pertence exclusivamente ao processo OUTRO-20."
+        }
+      ],
+      "questions": [],
+      "expected": []
+    },
+    {
+      "id": "S21",
+      "matter": "operacional-21",
+      "message": "Registre este assunto apenas no seu próprio processo; outros clientes com o mesmo nome não devem contaminar a memória.",
+      "documents": [
+        {
+          "id": "S21-D1",
+          "title": "Registro de outro processo 21",
+          "text": "O cliente Aurora do processo OUTRO-21 informou um adiantamento de R$ 14700,00. Este registro pertence exclusivamente ao processo OUTRO-21."
+        }
+      ],
+      "questions": [],
+      "expected": []
+    },
+    {
+      "id": "S22",
+      "matter": "operacional-22",
+      "message": "Registre este assunto apenas no seu próprio processo; outros clientes com o mesmo nome não devem contaminar a memória.",
+      "documents": [
+        {
+          "id": "S22-D1",
+          "title": "Registro de outro processo 22",
+          "text": "O cliente Aurora do processo OUTRO-22 informou um adiantamento de R$ 15400,00. Este registro pertence exclusivamente ao processo OUTRO-22."
+        }
+      ],
+      "questions": [],
+      "expected": []
+    },
+    {
+      "id": "S23",
+      "matter": "operacional-23",
+      "message": "Registre este assunto apenas no seu próprio processo; outros clientes com o mesmo nome não devem contaminar a memória.",
+      "documents": [
+        {
+          "id": "S23-D1",
+          "title": "Registro de outro processo 23",
+          "text": "O cliente Aurora do processo OUTRO-23 informou um adiantamento de R$ 16100,00. Este registro pertence exclusivamente ao processo OUTRO-23."
+        }
+      ],
+      "questions": [],
+      "expected": []
+    },
+    {
+      "id": "S24",
+      "matter": "aurora-principal",
+      "message": "Retome apenas PRINCIPAL-7, sem reenvio do histórico. Responda pela memória atual e preserve a citação da prova.",
+      "documents": [],
+      "questions": [
+        {
+          "id": "paid_cents",
+          "prompt": "Entrada comprovada do processo PRINCIPAL-7, em centavos?"
+        },
+        {
+          "id": "basis",
+          "prompt": "A natureza do valor é relato, hipótese ou prova?"
+        }
+      ],
+      "expected": [
+        {
+          "id": "paid_cents",
+          "value": "4800000",
+          "sources": ["S17-D1"],
+          "rationale": "Correção comprovada após várias sessões de outros processos."
+        },
+        {
+          "id": "basis",
+          "value": "prova",
+          "sources": ["S17-D1"],
+          "rationale": "Fonte conciliada do processo correto."
+        }
+      ]
+    }
+  ]
+}

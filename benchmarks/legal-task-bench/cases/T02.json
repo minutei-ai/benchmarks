@@ -52,22 +52,13 @@
     {
       "id": "paid_cents",
       "value": "5400000",
-      "sources": [
-        "D02",
-        "D03",
-        "D04"
-      ],
+      "sources": ["D02", "D03", "D04"],
       "rationale": "24 mil + 24 mil + 6 mil."
     },
     {
       "id": "unpaid_principal_cents",
       "value": "1800000",
-      "sources": [
-        "D01",
-        "D02",
-        "D03",
-        "D04"
-      ],
+      "sources": ["D01", "D02", "D03", "D04"],
       "rationale": "72 mil - 54 mil."
     },
     {
@@ -92,28 +83,39 @@
   "rubric": [
     {
       "id": "R1",
-      "criterion": "Impugna a narrativa de inadimplemento integral com pagamentos vinculados a cada fatura.",
-      "critical": true
+      "criterion": "A contestação impugna inadimplemento integral com pagamentos vinculados às faturas correspondentes.",
+      "artifacts": ["defense"],
+      "sources": ["D01", "D02", "D03", "D04"]
     },
     {
       "id": "R2",
-      "criterion": "Não alega quitação total nem transforma a falta de prova de pagamento do saldo em fato diverso.",
-      "critical": true
+      "criterion": "A contestação não alega quitação total.",
+      "artifacts": ["defense"],
+      "sources": ["D01", "D02", "D03", "D04"]
     },
     {
       "id": "R3",
-      "criterion": "Formula defesa e pedidos coerentes com abatimento, distinguindo principal de encargos não calculados.",
-      "critical": true
+      "criterion": "A contestação formula abatimento compatível com principal residual e separa encargos não calculados.",
+      "artifacts": ["defense"],
+      "sources": ["D01", "L01"]
     },
     {
       "id": "R4",
-      "criterion": "Explicita documentos faltantes e não inventa tempestividade, processo ou juízo.",
-      "critical": true
+      "criterion": "A contestação mantém dados de processo, juízo e tempestividade sem comprovação como pendências.",
+      "artifacts": ["defense"],
+      "sources": ["D05"]
     },
     {
       "id": "R5",
-      "criterion": "Quadro financeiro fecha em R$ 54.000 pagos e R$ 18.000 de principal residual.",
-      "critical": true
+      "criterion": "O quadro financeiro demonstra R$ 54.000 pagos e R$ 18.000 de principal residual.",
+      "artifacts": ["reconciliation"],
+      "sources": ["D01", "D02", "D03", "D04"]
+    },
+    {
+      "id": "R6",
+      "criterion": "O quadro identifica documentos faltantes para conferência dos encargos e do marco processual.",
+      "artifacts": ["reconciliation"],
+      "sources": ["D01", "D05"]
     }
   ]
 }

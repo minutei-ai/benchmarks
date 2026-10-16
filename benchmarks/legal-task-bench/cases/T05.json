@@ -42,17 +42,13 @@
     {
       "id": "spreadsheet_due",
       "value": "2026-09-30",
-      "sources": [
-        "D03"
-      ],
+      "sources": ["D03"],
       "rationale": "Data expressamente determinada."
     },
     {
       "id": "receipts_required",
       "value": "não",
-      "sources": [
-        "D03"
-      ],
+      "sources": ["D03"],
       "rationale": "Ordem revogada."
     },
     {
@@ -77,28 +73,45 @@
   "rubric": [
     {
       "id": "R1",
-      "criterion": "Identifica a decisão de esclarecimento como fonte das obrigações vigentes.",
-      "critical": true
+      "criterion": "A nota identifica a decisão de esclarecimento como fonte vigente.",
+      "artifacts": ["lawyer_note"],
+      "sources": ["D03"]
     },
     {
       "id": "R2",
-      "criterion": "Separa planilha com data expressa, comprovantes revogados e manifestação com prazo relativo.",
-      "critical": true
+      "criterion": "A nota registra 30/09/2026 como data final expressa da planilha.",
+      "artifacts": ["lawyer_note"],
+      "sources": ["D03"]
     },
     {
       "id": "R3",
-      "criterion": "Não converte alegação da parte em determinação judicial.",
-      "critical": true
+      "criterion": "A nota registra que a apresentação de comprovantes foi revogada.",
+      "artifacts": ["lawyer_note"],
+      "sources": ["D03"]
     },
     {
       "id": "R4",
-      "criterion": "Solicita a certidão e a revisão da memória de cálculo sem inventar vencimento.",
-      "critical": true
+      "criterion": "A nota deixa o vencimento relativo da manifestação indeterminado sem certidão.",
+      "artifacts": ["lawyer_note"],
+      "sources": ["D03", "D04"]
     },
     {
       "id": "R5",
-      "criterion": "Entrega checklist com responsáveis propostos e dependências claramente identificadas.",
-      "critical": false
+      "criterion": "A nota não trata a alegação da parte como ordem judicial.",
+      "artifacts": ["lawyer_note"],
+      "sources": ["D02"]
+    },
+    {
+      "id": "R6",
+      "criterion": "O checklist pede a certidão de intimação e a revisão da memória de cálculo.",
+      "artifacts": ["checklist"],
+      "sources": ["D04"]
+    },
+    {
+      "id": "R7",
+      "criterion": "O checklist identifica responsáveis propostos e dependências para execução, sem afirmar cumprimento já ocorrido.",
+      "artifacts": ["checklist"],
+      "sources": ["D03", "D04"]
     }
   ]
 }

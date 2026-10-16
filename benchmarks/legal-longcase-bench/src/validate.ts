@@ -1,19 +1,28 @@
+import { validateCase } from "@minutei/benchmark/evaluate";
 import { loadCase, manifest } from "./cases";
 
-let failed = false;
+const failures: string[] = [];
+if (new Set(manifest.cases).size !== manifest.cases.length) failures.push("Duplicate case ID");
 for (const id of manifest.cases) {
   const data = await loadCase(id);
-  const { documents, expected, questions } = data;
-  if (!data.deliverables.length || !data.rubric.length || new Set(data.deliverables.map((d) => d.id)).size !== data.deliverables.length || new Set(data.rubric.map((r) => r.id)).size !== data.rubric.length) failed = true;
-  const docIds = documents.map((doc) => doc.id);
-  if (data.id !== id || new Set(docIds).size !== docIds.length || questions.length !== expected.length || new Set(questions.map((q) => q.id)).size !== questions.length || new Set(expected.map((e) => e.id)).size !== expected.length) failed = true;
-  for (const fact of expected) {
-    if (!questions.some((question) => question.id === fact.id)) failed = true;
-    if (!fact.sources.every((source) => docIds.includes(source))) failed = true;
-    if (fact.value === null && fact.sources.length !== 0) failed = true;
-    if (fact.value !== null && fact.sources.length === 0) failed = true;
-  }
-  if (documents.length !== data.documentCount || documents.reduce((sum, doc) => sum + [...doc.text].length, 0) !== data.documentCharacters || documents.reduce((sum, doc) => sum + Buffer.byteLength(doc.text), 0) !== data.documentBytes) failed = true;
-  console.log(JSON.stringify({ id, documents: documents.length, questions: questions.length }));
+  const checks = {
+    ...validateCase(data),
+    documentCount: data.documents.length === data.documentCount,
+    characters:
+      data.documents.reduce((sum, document) => sum + [...document.text].length, 0) ===
+      data.documentCharacters,
+    bytes:
+      data.documents.reduce((sum, document) => sum + Buffer.byteLength(document.text), 0) ===
+      data.documentBytes,
+  };
+  if (data.id !== id || !Object.values(checks).every(Boolean)) failures.push(id);
+  console.log(
+    JSON.stringify({
+      id,
+      documents: data.documents.length,
+      questions: data.questions.length,
+      checks,
+    }),
+  );
 }
-if (failed) process.exitCode = 1;
+if (failures.length) process.exitCode = 1;
